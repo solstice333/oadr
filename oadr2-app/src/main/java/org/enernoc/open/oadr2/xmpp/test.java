@@ -18,7 +18,7 @@ public class test {
             "talk.google.com", 5222, "blah");
       XMPPConnection c = new XMPPConnection(config);
       c.connect();
-      c.login("knavero@gmail.com", "Hs200oo,");
+      c.login("knavero@gmail.com", "Hs200oo;");
       System.out.println(c.getUser());
       Roster r = c.getRoster();
 

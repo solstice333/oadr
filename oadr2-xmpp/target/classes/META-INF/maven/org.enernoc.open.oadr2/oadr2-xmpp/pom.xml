@@ -58,7 +58,7 @@
 					<systemProperties>
 						<property>
 							<name>smack.debugEnabled</name>
-							<value>true</value>
+							<value>false</value>
 						</property>
 						<property>
 							<name>smack.debuggerClass</name>
