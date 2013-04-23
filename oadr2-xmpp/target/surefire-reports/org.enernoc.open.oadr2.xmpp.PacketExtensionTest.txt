@@ -1,8 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: org.enernoc.open.oadr2.xmpp.PacketExtensionTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.266 sec <<< FAILURE!
-testPacketExtension(org.enernoc.open.oadr2.xmpp.PacketExtensionTest)  Time elapsed: 0.163 sec  <<< ERROR!
-java.lang.Exception: XMPP Username or password are null! Set the system properties 'xmpp-username' and 'xmpp-pass'
-	at org.enernoc.open.oadr2.xmpp.PacketExtensionTest.setUp(PacketExtensionTest.java:88)
-
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 9.752 sec
