@@ -42,6 +42,7 @@ To see debug output from the XMPP stream, add the following flag:
 Alternatively, to run as a Java application, execute "setup" and "run" inside the terminal:
 
    ./setup
+   
    ./run
 
 
