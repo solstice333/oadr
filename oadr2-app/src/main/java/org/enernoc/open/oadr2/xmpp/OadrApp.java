@@ -146,6 +146,60 @@ public class OadrApp {
       @SuppressWarnings("resource")
       Scanner s = new Scanner(System.in);
       venConnect();
+      
+      // add listener to ven
+      PacketListener oadrDistributeEventListener = new PacketListener() {
+         @Override
+         public void processPacket(Packet packet) {
+            System.out.println("OadrDistributeEvent payload received!: ");
+
+            // grab OadrDistributeEvent payload and print xml
+            printPacket(packet);
+            OADR2PacketExtension oadrExtension = (OADR2PacketExtension) packet
+                  .getExtension(OADR2_XMLNS);
+            OadrDistributeEvent ode = (OadrDistributeEvent) oadrExtension
+                  .getPayload();
+            try {
+               ConnHandler.testNamespace(ode);
+            }
+            catch (JAXBException je) {
+               je.printStackTrace();
+            }
+
+            // parsing oadrDistributeEvent payload for relevant elements and
+            // instantiating OadrCreatedEvent payload via factory method
+            System.out.println("parsing oadrDistributeEvent payload...");
+            OadrCreatedEvent oce = new OadrPayloadFactory()
+                  .createResponsePayload(ode);
+
+            // print xml of OadrCreatedEvent payload
+            try {
+               Thread.sleep(5000L);
+               System.out.println("Responding with oadrCreatedEvent payload: ");
+               ConnHandler.testNamespace(oce);
+            }
+            catch (Exception e) {
+               e.printStackTrace();
+            }
+            finally {
+               System.out.println();
+            }
+
+            // creates IQ packet for oadrCreatedEvent and sends to vtn
+            System.out.println("sending oadrCreatedEvent payload...");
+            try {
+               IQ oceiq = new ConnHandler().createIQ(packet.getFrom(), oce);
+               ven.sendPacket(oceiq);
+            }
+            catch (Exception e) {
+               e.printStackTrace();
+            }
+
+            System.out.println("oadrCreatedEvent payload sent!");
+         }
+      };
+      ven.addPacketListener(oadrDistributeEventListener,
+            new OADR2PacketFilter());
 
       while (true) {
          System.out.println("Would you like to quit? Type 'quit()' to exit"
@@ -223,60 +277,6 @@ public class OadrApp {
             pass = venConnect();
          }
       }
-
-      // add listener to ven
-      PacketListener oadrDistributeEventListener = new PacketListener() {
-         @Override
-         public void processPacket(Packet packet) {
-            System.out.println("OadrDistributeEvent payload received!: ");
-
-            // grab OadrDistributeEvent payload and print xml
-            printPacket(packet);
-            OADR2PacketExtension oadrExtension = (OADR2PacketExtension) packet
-                  .getExtension(OADR2_XMLNS);
-            OadrDistributeEvent ode = (OadrDistributeEvent) oadrExtension
-                  .getPayload();
-            try {
-               ConnHandler.testNamespace(ode);
-            }
-            catch (JAXBException je) {
-               je.printStackTrace();
-            }
-
-            // parsing oadrDistributeEvent payload for relevant elements and
-            // instantiating OadrCreatedEvent payload via factory method
-            System.out.println("parsing oadrDistributeEvent payload...");
-            OadrCreatedEvent oce = new OadrPayloadFactory()
-                  .createResponsePayload(ode);
-
-            // print xml of OadrCreatedEvent payload
-            try {
-               Thread.sleep(5000L);
-               System.out.println("Responding with oadrCreatedEvent payload: ");
-               ConnHandler.testNamespace(oce);
-            }
-            catch (Exception e) {
-               e.printStackTrace();
-            }
-            finally {
-               System.out.println();
-            }
-
-            // creates IQ packet for oadrCreatedEvent and sends to vtn
-            System.out.println("sending oadrCreatedEvent payload...");
-            try {
-               IQ oceiq = new ConnHandler().createIQ(packet.getFrom(), oce);
-               ven.sendPacket(oceiq);
-            }
-            catch (Exception e) {
-               e.printStackTrace();
-            }
-
-            System.out.println("oadrCreatedEvent payload sent!");
-         }
-      };
-      ven.addPacketListener(oadrDistributeEventListener,
-            new OADR2PacketFilter());
 
       return pass;
    }
