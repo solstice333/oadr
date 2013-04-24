@@ -189,9 +189,9 @@ public class ConnHandler implements PacketListener {
 
    public IQ createIQ(String sendTo, Object payload)
          throws DatatypeConfigurationException, JAXBException {
-      
+
       IQ oadrIQ = null;
-      
+
       if (payload instanceof OadrDistributeEvent) {
          OadrDistributeEvent ode = (OadrDistributeEvent) payload;
          oadrIQ = new OADR2IQ(new OADR2PacketExtension(ode,
