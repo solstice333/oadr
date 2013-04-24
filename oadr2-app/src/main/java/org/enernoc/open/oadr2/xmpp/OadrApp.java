@@ -330,14 +330,16 @@ public class OadrApp {
 
       if (ope.getElementName().equals("oadrCreatedEvent")) {
          OadrCreatedEvent payload = (OadrCreatedEvent) ope.getPayload();
-         
+
          @SuppressWarnings("unchecked")
          List<EventResponses.EventResponse> list = (List<EventResponses.EventResponse>) payload
                .getEiCreatedEvent().getEventResponses();
-         
+         System.out.println("list size: " + list.size());
+
          for (int i = 0; i < list.size(); i++) {
             System.out.println();
-            EventResponses.EventResponse e = (EventResponse) list.get(i);
+            EventResponses.EventResponse e = (EventResponses.EventResponse) list
+                  .get(i);
             System.out.println("Request id: " + e.getRequestID());
             System.out.println("Response description: "
                   + e.getResponseDescription());
@@ -345,7 +347,6 @@ public class OadrApp {
             System.out.println("Event ID: "
                   + e.getQualifiedEventID().getEventID());
          }
-
       }
       else if (ope.getElementName().equals("oadrDistributeEvent")) {
          OadrDistributeEvent payload = (OadrDistributeEvent) ope.getPayload();
