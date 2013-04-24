@@ -110,7 +110,9 @@ public class OadrApp {
                   OadrDistributeEvent ode = new OadrPayloadFactory().createEventPayload();
                   IQ iq = connHandler.createIQ(to, ode);
                   vtn.sendPacket(iq);
-                  System.out.println("Message sent to " + to);
+                  
+                  System.out.println("Sending the following oadrDistributeEvent payload to " + to + ": ");
+                  ConnHandler.testNamespace(ode);
                }
 
                else if (ans.equals("no"))
@@ -140,8 +142,9 @@ public class OadrApp {
          PacketListener oadrDistributeEventListener = new PacketListener() {
             @Override
             public void processPacket(Packet packet) {
-               // grab packet extension and typecast payload to OadrDistributeEvent
-               // object
+               System.out.println("OadrDistributeEvent payload received!");
+               
+               // grab OadrDistributeEvent payload
                OADR2PacketExtension oadrExtension = (OADR2PacketExtension) packet
                      .getExtension(OADR2_XMLNS);
                OadrDistributeEvent ode = (OadrDistributeEvent) oadrExtension
