@@ -105,7 +105,7 @@ public class OadrPayloadFactory {
          switch (oadrEvents.get(i).getOadrResponseRequired()) {
          case ALWAYS:
             responses.add(new EventResponses.EventResponse()
-                  .withResponseDescription("Created")
+                  .withResponseDescription("Created event! Wooo!")
                   .withRequestID(ode.getRequestID())
                   .withOptType(OptTypeType.OPT_IN)
                   .withResponseCode(new ResponseCode().withValue("201"))

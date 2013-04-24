@@ -1,12 +1,16 @@
 package org.enernoc.open.oadr2.xmpp;
 
+import java.util.List;
 import java.util.Scanner;
 
 import javax.xml.bind.JAXBException;
 import javax.xml.datatype.DatatypeConfigurationException;
 
+import org.enernoc.open.oadr2.model.EventResponses;
+import org.enernoc.open.oadr2.model.EventResponses.EventResponse;
 import org.enernoc.open.oadr2.model.OadrCreatedEvent;
 import org.enernoc.open.oadr2.model.OadrDistributeEvent;
+import org.enernoc.open.oadr2.model.OadrDistributeEvent.OadrEvent;
 import org.jivesoftware.smack.PacketListener;
 import org.jivesoftware.smack.XMPPConnection;
 import org.jivesoftware.smack.XMPPException;
@@ -44,8 +48,15 @@ public class OadrApp {
       @SuppressWarnings("resource")
       Scanner s = new Scanner(System.in);
 
-      // connect
+      // connect and add listener
       vtnConnect();
+      PacketListener oadrCreatedEventListener = new PacketListener() {
+         @Override
+         public void processPacket(Packet packet) {
+            printPacket(packet);
+         }
+      };
+      vtn.addPacketListener(oadrCreatedEventListener, new OADR2PacketFilter());
 
       // display roster, select contact
       while (true) {
@@ -146,25 +157,25 @@ public class OadrApp {
       @SuppressWarnings("resource")
       Scanner s = new Scanner(System.in);
       venConnect();
-      
+
       // add listener to ven
       PacketListener oadrDistributeEventListener = new PacketListener() {
          @Override
          public void processPacket(Packet packet) {
             System.out.println("OadrDistributeEvent payload received!: ");
 
-            // grab OadrDistributeEvent payload and print xml
+            // grab OadrDistributeEvent payload
             printPacket(packet);
             OADR2PacketExtension oadrExtension = (OADR2PacketExtension) packet
                   .getExtension(OADR2_XMLNS);
+
+            if (oadrExtension.getElementName().equals("oadrDistributeEvent")) {
+               System.err
+                     .println("Incoming payload is not oadrDistributeEvent. Exiting");
+               System.exit(1);
+            }
             OadrDistributeEvent ode = (OadrDistributeEvent) oadrExtension
                   .getPayload();
-            try {
-               ConnHandler.testNamespace(ode);
-            }
-            catch (JAXBException je) {
-               je.printStackTrace();
-            }
 
             // parsing oadrDistributeEvent payload for relevant elements and
             // instantiating OadrCreatedEvent payload via factory method
@@ -174,8 +185,9 @@ public class OadrApp {
 
             // print xml of OadrCreatedEvent payload
             try {
-               Thread.sleep(5000L);
+               Thread.sleep(2500L);
                System.out.println("Responding with oadrCreatedEvent payload: ");
+               Thread.sleep(2500L);
                ConnHandler.testNamespace(oce);
             }
             catch (Exception e) {
@@ -316,8 +328,51 @@ public class OadrApp {
       System.out.println("packet extension element name: "
             + ope.getElementName());
 
-      System.out.println(((OADR2PacketExtension) packet
-            .getExtension(OADR2_xmlns)).toXML());
+      if (ope.getElementName().equals("oadrCreatedEvent")) {
+         OadrCreatedEvent payload = (OadrCreatedEvent) ope.getPayload();
+         
+         @SuppressWarnings("unchecked")
+         List<EventResponses.EventResponse> list = (List<EventResponses.EventResponse>) payload
+               .getEiCreatedEvent().getEventResponses();
+         
+         for (int i = 0; i < list.size(); i++) {
+            System.out.println();
+            EventResponses.EventResponse e = (EventResponse) list.get(i);
+            System.out.println("Request id: " + e.getRequestID());
+            System.out.println("Response description: "
+                  + e.getResponseDescription());
+            System.out.println("OptType: " + e.getOptType());
+            System.out.println("Event ID: "
+                  + e.getQualifiedEventID().getEventID());
+         }
+
+      }
+      else if (ope.getElementName().equals("oadrDistributeEvent")) {
+         OadrDistributeEvent payload = (OadrDistributeEvent) ope.getPayload();
+         List<OadrEvent> list = (List<OadrEvent>) payload.getOadrEvents();
+
+         System.out.println("Request id: " + payload.getRequestID());
+
+         for (int i = 0; i < list.size(); i++) {
+            System.out.println();
+            OadrEvent e = (OadrEvent) list.get(i);
+            System.out.println("Oadr Response Required: "
+                  + e.getOadrResponseRequired());
+            System.out.println("Event ID: "
+                  + e.getEiEvent().getEventDescriptor().getEventID());
+            System.out.println("Event status: "
+                  + e.getEiEvent().getEventDescriptor().getEventStatus());
+            System.out.println("Date and time: "
+                  + e.getEiEvent().getEventDescriptor().getCreatedDateTime());
+         }
+      }
+      else {
+         System.err
+               .println("Packet ext. is neither oadrCreatedEvent or oadrDistributeEvent. Exiting");
+         System.exit(1);
+      }
+
+      System.out.println();
    }
 
 }
