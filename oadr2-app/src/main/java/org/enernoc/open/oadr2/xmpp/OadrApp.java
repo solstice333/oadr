@@ -330,11 +330,9 @@ public class OadrApp {
 
       if (ope.getElementName().equals("oadrCreatedEvent")) {
          OadrCreatedEvent payload = (OadrCreatedEvent) ope.getPayload();
-
-         @SuppressWarnings("unchecked")
+         
          List<EventResponses.EventResponse> list = (List<EventResponses.EventResponse>) payload
-               .getEiCreatedEvent().getEventResponses();
-         System.out.println("list size: " + list.size());
+               .getEiCreatedEvent().getEventResponses().getEventResponses();
 
          for (int i = 0; i < list.size(); i++) {
             System.out.println();
