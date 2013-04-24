@@ -169,7 +169,7 @@ public class OadrApp {
             OADR2PacketExtension oadrExtension = (OADR2PacketExtension) packet
                   .getExtension(OADR2_XMLNS);
 
-            if (oadrExtension.getElementName().equals("oadrDistributeEvent")) {
+            if (!oadrExtension.getElementName().equals("oadrDistributeEvent")) {
                System.err
                      .println("Incoming payload is not oadrDistributeEvent. Exiting");
                System.exit(1);
