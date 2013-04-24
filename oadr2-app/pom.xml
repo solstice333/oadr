@@ -9,13 +9,6 @@
 	<artifactId>oadr2-app</artifactId>
 	<name>OpenADR2 Open Reference Implementation Application</name>
 
-	<dependencies>
-		<dependency>
-			<artifactId>oadr2-xmpp</artifactId>
-			<groupId>${project.groupId}</groupId>
-			<version>${project.version}</version>
-		</dependency>
-	</dependencies>
 
 	<build>
 		<plugins>
@@ -93,4 +86,12 @@
 
 	<url>https://github.com/solstice333/oadr</url>
 	<description>Capability of logging into two separate JID's on two separate machines located on different networks. Sends oadrDistributeEvent payload from vtn to ven.</description>
+	<dependencies>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>oadr2-xmpp</artifactId>
+			<version>${project.version}</version>
+			<scope>provided</scope>
+		</dependency>
+	</dependencies>
 </project>

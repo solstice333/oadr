@@ -7,17 +7,15 @@ import javax.xml.bind.JAXBException;
 import javax.xml.datatype.DatatypeConfigurationException;
 
 import org.enernoc.open.oadr2.model.OadrDistributeEvent;
-//import org.jivesoftware.smack.PacketCollector;
 import org.jivesoftware.smack.PacketListener;
 import org.jivesoftware.smack.XMPPConnection;
 import org.jivesoftware.smack.XMPPException;
 import org.jivesoftware.smack.packet.IQ;
 import org.jivesoftware.smack.packet.Packet;
 
-import org.junit.Assert;
 
 //run as java application
-public class TestApplication {
+public class OadrApp {
    static String username;
    static String password;
    static boolean isVen;
@@ -145,7 +143,8 @@ public class TestApplication {
          PacketListener oadrListener = new PacketListener() {
             @Override
             public void processPacket(Packet packet) {
-               getEverythingAndPrint(packet);
+               System.out.println("Printing packet...");
+               printPacket(packet);
             }
          };
 
@@ -164,7 +163,6 @@ public class TestApplication {
             }
             else if (ans.equals("poll()")) {
                try {
-                  // getEverythingAndPrint(packetCollector.nextResult(5000L);
                   System.out.println("packetCollector disabled");
                }
                catch (AssertionError ae) {
@@ -262,13 +260,16 @@ public class TestApplication {
       isVen = VenOrVtn("Type 'ven' or 'vtn' to specify");
    }
 
-   private static void getEverythingAndPrint(Packet packet) {
+   private static void printPacket (Packet packet) {
       final String OADR2_xmlns = "http://openadr.org/oadr-2.0a/2012/07";
 
       OADR2PacketExtension ope = (OADR2PacketExtension) packet
             .getExtension(OADR2_xmlns);
 
-      Assert.assertNotNull(packet);
+      if(packet == null) {
+         System.err.println("packet is null! Exiting...");
+         System.exit(1);
+      }
       System.out.println("packet id: " + packet.getPacketID());
       System.out.println("packet from: " + packet.getFrom());
       System.out.println("packet class: " + packet.getClass());

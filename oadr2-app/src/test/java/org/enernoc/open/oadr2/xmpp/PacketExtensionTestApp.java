@@ -34,11 +34,13 @@ public class PacketExtensionTestApp {
       // setup
       setUp();
 
-      //Create PacketCollector queue to retrieve packets sent by vtn
-      //PacketCollector packetCollector = venConnection
-       //.createPacketCollector(new OADR2PacketFilter());
+      // Create PacketCollector queue to retrieve packets sent by vtn
+      PacketCollector packetCollector = venConnection
+       .createPacketCollector(new OADR2PacketFilter());
+      //PacketCollector packetCollector = vtnConnection
+        //    .createPacketCollector(new OADR2PacketFilter());
 
-      PacketListener oadrListener = new PacketListener() {
+      PacketListener oadrDistributeEventListener = new PacketListener() {
          @Override
          public void processPacket(Packet packet) {
             // TODO: when a packet gets received by ven
@@ -73,7 +75,7 @@ public class PacketExtensionTestApp {
                System.out.println();
             }
 
-            //creates IQ packet for oadrCreatedEvent and sends to vtn
+            // creates IQ packet for oadrCreatedEvent and sends to vtn
             System.out.println("sending oadrCreatedEvent payload...");
             try {
                IQ oceiq = new ConnHandler().createIQ(packet.getFrom(), oce);
@@ -86,7 +88,8 @@ public class PacketExtensionTestApp {
             System.out.println("oadrCreatedEvent payload sent!");
          }
       };
-      venConnection.addPacketListener(oadrListener, new OADR2PacketFilter());
+      venConnection.addPacketListener(oadrDistributeEventListener,
+            new OADR2PacketFilter());
 
       // print xml of oadrDistributeEvent payload
       System.out.println("oadrDistributeEvent payload: ");
@@ -97,9 +100,8 @@ public class PacketExtensionTestApp {
       IQ odeiq = new ConnHandler().createIQ(venConnection.getUser(), ode);
       vtnConnection.sendPacket(odeiq);
 
-      //pollTest(packetCollector);
-
       Thread.sleep(5000L);
+      pollTest(packetCollector);
       tearDown();
       System.out.println("Tests passed. Exiting now...");
       System.exit(0);
@@ -165,8 +167,8 @@ public class PacketExtensionTestApp {
          vtnConnection.disconnect();
    }
 
-   private static void tests(Packet packet) {
-      assertNotNull(packet);
+   private static void oadrDistributeEventTests(Packet packet) {
+      //assertNotNull(packet);
       OADR2PacketExtension extension = (OADR2PacketExtension) packet
             .getExtension(OADR2_XMLNS);
       assertEquals("oadrDistributeEvent", extension.getElementName());
@@ -178,11 +180,26 @@ public class PacketExtensionTestApp {
       assertEquals("test-123", payload.getRequestID());
    }
 
+   private static void oadrCreatedEventTests(Packet packet) {
+      assertNotNull(packet);
+      OADR2PacketExtension extension = (OADR2PacketExtension) packet
+            .getExtension(OADR2_XMLNS);
+      assertEquals("oadrCreatedEvent", extension.getElementName());
+      assertEquals(OADR2_XMLNS, extension.getNamespace());
+      Object pObj = extension.getPayload();
+      assertNotNull(pObj);
+      assertTrue(pObj instanceof OadrCreatedEvent);
+      OadrCreatedEvent payload = (OadrCreatedEvent) pObj;
+      assertEquals("test-123", payload.getEiCreatedEvent().getEiResponse()
+            .getRequestID());
+   }
+
    private static void pollTest(PacketCollector packetCollector) {
-      Packet packet = packetCollector.nextResult(5000L);
+      Packet packet = packetCollector.nextResult(10000L);
 
       // tests
-      tests(packet);
+       oadrDistributeEventTests(packet);
+      //oadrCreatedEventTests(packet);
    }
 
 }

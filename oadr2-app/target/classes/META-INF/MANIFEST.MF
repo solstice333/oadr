@@ -1,15 +1,7 @@
 Manifest-Version: 1.0
 Built-By: knavero
 Build-Jdk: 1.7.0_15
-Class-Path: ./oadr2-app/target/lib/oadr2-xmpp-0.1.0.jar ./oadr2-app/ta
- rget/lib/oadr2-model-0.1.0.jar ./oadr2-app/target/lib/jaxb2-basics-ru
- ntime-0.6.1.jar ./oadr2-app/target/lib/jaxb2-fluent-api-3.0.jar ./oad
- r2-app/target/lib/persistence-api-1.0.2.jar ./oadr2-app/target/lib/hy
- perjaxb3-ejb-runtime-0.5.6.jar ./oadr2-app/target/lib/commons-lang-2.
- 2.jar ./oadr2-app/target/lib/smack-3.2.1.jar ./oadr2-app/target/lib/s
- mackx-3.2.1.jar ./oadr2-app/target/lib/jaxb-impl-2.2.5.1.jar ./oadr2-
- app/target/lib/slf4j-log4j12-1.5.8.jar ./oadr2-app/target/lib/slf4j-a
- pi-1.5.8.jar ./oadr2-app/target/lib/log4j-1.2.16.jar
+Class-Path: ./oadr2-app/target/lib/log4j-1.2.16.jar
 Main-Class: org.enernoc.open.oadr2.xmpp.TestApplication
 Created-By: Maven Integration for Eclipse
 

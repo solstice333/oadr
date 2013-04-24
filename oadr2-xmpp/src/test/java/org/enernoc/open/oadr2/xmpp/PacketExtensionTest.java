@@ -59,8 +59,10 @@ public class PacketExtensionTest {
 
    static final String OADR2_XMLNS = "http://openadr.org/oadr-2.0a/2012/07";
 
-   static final String username = System.getProperty("xmpp-username");
-   static final String passwd = System.getProperty("xmpp-pass");
+   static final String username = "openadrvtntest@gmail.com";
+         //System.getProperty("xmpp-username");
+   static final String passwd = "openadrtest"; 
+         //System.getProperty("xmpp-pass");
    
    
    ConnectionConfiguration connConfig = new ConnectionConfiguration(
