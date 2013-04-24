@@ -7,8 +7,8 @@ https://github.com/EnerNOC/oadr2-ven
 
 See: http://openadr.org/
 
-This project provides the building blocks for imlementing a VEN client.  In particular,
-it aims to provide protocol bindings.  It *does not* actually implment any service 
+This project provides the building blocks for implementing a VEN client.  In particular,
+it aims to provide protocol bindings.  It *does not* actually implement any service 
 functionality (at least not yet.)  But it should provide enough at least for someone to 
 start implementing OpenADR 2.0 services. 
 
@@ -37,6 +37,12 @@ To run XMPP unit tests with your Google Talk account, do the following:
 
 To see debug output from the XMPP stream, add the following flag:
 `-Dsmack.debugEnabled=true`
+
+
+Alternatively, to run as a Java application, execute "setup" and "run" inside the terminal:
+
+   ./setup
+   ./run
 
 
 ## License ##
