@@ -330,7 +330,7 @@ public class OadrApp {
 
       if (ope.getElementName().equals("oadrCreatedEvent")) {
          OadrCreatedEvent payload = (OadrCreatedEvent) ope.getPayload();
-         
+
          List<EventResponses.EventResponse> list = (List<EventResponses.EventResponse>) payload
                .getEiCreatedEvent().getEventResponses().getEventResponses();
 
