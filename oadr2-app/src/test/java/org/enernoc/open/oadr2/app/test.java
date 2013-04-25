@@ -1,68 +1,46 @@
 package org.enernoc.open.oadr2.app;
 
-import java.util.Scanner;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.Locale;
+import java.util.TimeZone;
 
-import org.jivesoftware.smack.ConnectionConfiguration;
-import org.jivesoftware.smack.RosterEntry;
-import org.jivesoftware.smack.XMPPConnection;
-import org.jivesoftware.smack.XMPPException;
-import org.jivesoftware.smack.Roster;
-import org.jivesoftware.smack.packet.Presence;
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.XMLGregorianCalendar;
 
 public class test {
 
-   public static void main(String[] args) throws XMPPException,
-         InterruptedException {
-      @SuppressWarnings("resource")
-      Scanner s = new Scanner(System.in);
-      ConnectionConfiguration config = new ConnectionConfiguration(
-            "talk.google.com", 5222, "blah");
-      XMPPConnection c = new XMPPConnection(config);
-      c.connect();
-      c.login("knavero@gmail.com", "Hs200oo;");
-      System.out.println(c.getUser());
-      Roster r = c.getRoster();
+   public static void main(String[] args) throws DatatypeConfigurationException {
+      DatatypeFactory fac = DatatypeFactory.newInstance();
 
-      int count = 0;
+      // This code block creates specifies date and time of when the event
+      // starts
+      final GregorianCalendar cal = (GregorianCalendar) Calendar.getInstance(
+            TimeZone.getTimeZone("America/Los_Angeles"), Locale.US);
+      // parameters: year, month, date, hour, minute, second
+      cal.set(2013, Calendar.MAY, 31, 17, 35, 55);
+      XMLGregorianCalendar startdt = fac.newXMLGregorianCalendar(cal);
+      System.out.println(startdt);
 
-      System.out.println("buddy count: " + r.getEntryCount() + "\n");
+      // This commented block retrieves all possible ID inputs to timezone
+      /*
+       * String[] tz = TimeZone.getAvailableIDs(); for(int i = 0; i < tz.length;
+       * i++) { System.out.println(TimeZone.getAvailableIDs()[i]); }
+       */
 
-      // display contacts
-      while (count == 0) {
-         count = 0;
-         for (RosterEntry entry : r.getEntries()) {
-            if (r.getPresence(entry.getUser()).isAvailable())
-               count++;
-         }
-      }
+      // This code block implements a way to retrieve a Comparable object
+      GregorianCalendar gc = startdt.toGregorianCalendar(
+            TimeZone.getTimeZone("America/Phoenix"), Locale.US, startdt);
+      System.out.println(gc);
 
-      String reply;
-      while (true) {
-         for (RosterEntry entry : r.getEntries()) {
-            if (r.getPresence(entry.getUser()).isAvailable()) {
-               System.out.println("User: " + entry.getUser() + ": "
-                     + entry.getName());
-               System.out.println("getPresence: "
-                     + r.getPresence(entry.getUser()));
-               System.out.println("getPresenceResource: "
-                     + r.getPresenceResource(entry.getUser()));
-
-               //get presence packet and then use getFrom method to retrieve full JID
-               Presence p = r.getPresence(entry.getUser());
-               System.out.println("from: " + p.getFrom());
-
-               System.out.println();
-            }
-         }
-
-         System.out
-               .println("Type 'refresh()' to refresh the list (any other string input will quit) ");
-         reply = s.next();
-
-         if (!reply.equals("refresh()"))
-            break;
-      }
+      GregorianCalendar gc1 = (GregorianCalendar) Calendar.getInstance(
+            TimeZone.getTimeZone("America/Los_Angeles"), Locale.US);
+      GregorianCalendar gc2 = (GregorianCalendar) Calendar.getInstance(
+            TimeZone.getTimeZone("America/Los_Angeles"), Locale.US);
+      gc2.set(2013, Calendar.DECEMBER, 31, 17, 35, 55);
+      
+      System.out.println(gc.compareTo(gc2));
 
    }
-
 }

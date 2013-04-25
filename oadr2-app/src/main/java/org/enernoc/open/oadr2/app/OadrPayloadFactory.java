@@ -146,6 +146,7 @@ public class OadrPayloadFactory {
       DatatypeFactory xmlDatatypeFactory = DatatypeFactory.newInstance();
       final GregorianCalendar cal = (GregorianCalendar) Calendar.getInstance(
             TimeZone.getTimeZone("America/Los_Angeles"), Locale.US);
+      cal.set(2013, Calendar.MAY, 31, 17, 35, 55);
       final XMLGregorianCalendar startDateTime = xmlDatatypeFactory
             .newXMLGregorianCalendar(cal);
 
