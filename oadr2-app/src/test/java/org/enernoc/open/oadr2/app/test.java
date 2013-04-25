@@ -1,4 +1,4 @@
-package org.enernoc.open.oadr2.xmpp;
+package org.enernoc.open.oadr2.app;
 
 import java.util.Scanner;
 
@@ -13,6 +13,7 @@ public class test {
 
    public static void main(String[] args) throws XMPPException,
          InterruptedException {
+      @SuppressWarnings("resource")
       Scanner s = new Scanner(System.in);
       ConnectionConfiguration config = new ConnectionConfiguration(
             "talk.google.com", 5222, "blah");
@@ -35,7 +36,7 @@ public class test {
          }
       }
 
-      String user, reply;
+      String reply;
       while (true) {
          for (RosterEntry entry : r.getEntries()) {
             if (r.getPresence(entry.getUser()).isAvailable()) {

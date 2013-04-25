@@ -5,7 +5,7 @@ import javax.xml.bind.PropertyException;
 
 import com.sun.xml.bind.marshaller.NamespacePrefixMapper;
 
-class OADR2NamespacePrefixMapper extends NamespacePrefixMapper {
+public class OADR2NamespacePrefixMapper extends NamespacePrefixMapper {
 	
 	public OADR2NamespacePrefixMapper() {}
 	

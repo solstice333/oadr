@@ -12,7 +12,7 @@ import org.jivesoftware.smack.packet.Packet;
  * xmppConnection.addPacketListener(myPacketCollector, new OADRPacketFilter());
  * </code>
  */
-class OADR2PacketFilter implements PacketFilter {
+public class OADR2PacketFilter implements PacketFilter {
 
    static final String OADR_XMLNS = OadrDistributeEvent.class.getAnnotation(
          XmlRootElement.class).namespace();

@@ -8,7 +8,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import org.jivesoftware.smack.packet.PacketExtension;
 
-class OADR2PacketExtension implements PacketExtension {
+public class OADR2PacketExtension implements PacketExtension {
 	
 	// JAXB object don't inherit a base class, so you'll need to cast to 
 	// the correct type, which you can infer based on the root element name

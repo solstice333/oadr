@@ -1,4 +1,4 @@
-package org.enernoc.open.oadr2.xmpp;
+package org.enernoc.open.oadr2.app;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;

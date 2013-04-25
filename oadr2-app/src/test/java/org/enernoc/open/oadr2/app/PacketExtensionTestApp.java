@@ -1,4 +1,4 @@
-package org.enernoc.open.oadr2.xmpp;
+package org.enernoc.open.oadr2.app;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -8,8 +8,13 @@ import java.util.Scanner;
 
 import javax.xml.bind.Marshaller;
 
+import org.enernoc.open.oadr2.app.ConnHandler;
+import org.enernoc.open.oadr2.app.OadrPayloadFactory;
 import org.enernoc.open.oadr2.model.OadrCreatedEvent;
 import org.enernoc.open.oadr2.model.OadrDistributeEvent;
+import org.enernoc.open.oadr2.xmpp.JAXBManager;
+import org.enernoc.open.oadr2.xmpp.OADR2PacketExtension;
+import org.enernoc.open.oadr2.xmpp.OADR2PacketFilter;
 import org.jivesoftware.smack.ConnectionConfiguration;
 import org.jivesoftware.smack.PacketCollector;
 import org.jivesoftware.smack.PacketListener;

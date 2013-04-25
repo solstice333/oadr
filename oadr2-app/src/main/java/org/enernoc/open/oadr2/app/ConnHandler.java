@@ -1,4 +1,4 @@
-package org.enernoc.open.oadr2.xmpp;
+package org.enernoc.open.oadr2.app;
 
 import java.util.Collection;
 
@@ -8,6 +8,9 @@ import javax.xml.datatype.DatatypeConfigurationException;
 
 import org.enernoc.open.oadr2.model.OadrCreatedEvent;
 import org.enernoc.open.oadr2.model.OadrDistributeEvent;
+import org.enernoc.open.oadr2.xmpp.JAXBManager;
+import org.enernoc.open.oadr2.xmpp.OADR2IQ;
+import org.enernoc.open.oadr2.xmpp.OADR2PacketExtension;
 import org.jivesoftware.smack.ConnectionConfiguration;
 import org.jivesoftware.smack.PacketListener;
 import org.jivesoftware.smack.Roster;

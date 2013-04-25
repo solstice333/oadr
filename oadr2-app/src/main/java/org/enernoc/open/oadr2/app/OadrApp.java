@@ -1,4 +1,4 @@
-package org.enernoc.open.oadr2.xmpp;
+package org.enernoc.open.oadr2.app;
 
 import java.util.List;
 import java.util.Scanner;
@@ -10,6 +10,8 @@ import org.enernoc.open.oadr2.model.EventResponses;
 import org.enernoc.open.oadr2.model.OadrCreatedEvent;
 import org.enernoc.open.oadr2.model.OadrDistributeEvent;
 import org.enernoc.open.oadr2.model.OadrDistributeEvent.OadrEvent;
+import org.enernoc.open.oadr2.xmpp.OADR2PacketExtension;
+import org.enernoc.open.oadr2.xmpp.OADR2PacketFilter;
 import org.jivesoftware.smack.PacketListener;
 import org.jivesoftware.smack.XMPPConnection;
 import org.jivesoftware.smack.XMPPException;
