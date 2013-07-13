@@ -1,5 +1,6 @@
 #!/bin/bash
 
 echo building package...
+sudo apt-get install maven
 mvn package -Dxmpp-username="openadrvtntest@gmail.com" -Dxmpp-pass="openadrtest" -Dsmack.debugEnabled=true
 echo done!
