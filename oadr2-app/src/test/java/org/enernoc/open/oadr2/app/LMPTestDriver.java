@@ -2,7 +2,7 @@ package org.enernoc.open.oadr2.app;
 
 import org.junit.Assert;
 
-public class TestDriver {
+public class LMPTestDriver {
 
    public static void main(String[] args) {
       LMPGenerator lmp = new LMPGenerator();
