@@ -49,19 +49,22 @@ public class Unzip {
          while ((len = zis.read(buf)) > 0) {
             fos.write(buf, 0, len);
          }
-         
+
+         System.out.println("File rename: "
+               + unzippedFile.renameTo(new File(OUTPUT_DIR + "lmp.xml")));
+
          fos.close();
          ze = zis.getNextEntry();
       }
-      
+
       zis.closeEntry();
       zis.close();
-      
+
       System.out.println("Cleaning...");
-      
-      File f = new File(INPUT_PATH);
-      f.delete();
-      
+
+      File deleteZip = new File(INPUT_PATH);
+      deleteZip.delete();
+
       System.out.println("Done!");
    }
 
