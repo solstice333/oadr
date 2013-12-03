@@ -10,6 +10,7 @@ import java.net.URLConnection;
 public class URLConnectionAndDownload {
    
    public static void connectAndDownload() throws IOException {
+      //TODO substitute startdate and enddate values with present date. Date/Calendar class maybe?
       URLConnection oasis = new URL(
             "http://oasis.caiso.com/mrtu-oasis/SingleZip?queryname=PRC_LMP&startdate=20130716&enddate=20130716&market_run_id=DAM&node=ANAHEIM_6_N001")
             .openConnection();

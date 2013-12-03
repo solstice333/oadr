@@ -18,6 +18,8 @@ import org.jivesoftware.smack.XMPPException;
 import org.jivesoftware.smack.packet.IQ;
 import org.jivesoftware.smack.packet.Packet;
 
+//TODO rewrite this code with better organization later. Keep as is for now. 
+//Just experimenting with Smack and sending IQ packets across different networks
 public class OadrApp {
    static String username;
    static String password;

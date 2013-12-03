@@ -27,19 +27,17 @@ start implementing OpenADR 2.0 services.
 
 ## Development, Build, Testing ##
 
-Use Maven: http://maven.apache.org
+Eclipse IDE for Java EE Developers - http://www.eclipse.org/downloads/packages/eclipse-ide-java-ee-developers/keplersr1
+(Comes with Maven Integration)
 
-Build by running `maven compile` from this directory.  Dependencies will be downloaded automatically.  
+Note: Running Maven clean and then Maven compile, all within Eclipse, will cause resolution errors for classes that are correctly generated and/or existent within the correct package (seems to be a bug with the Maven plugin). To fix this, open the terminal, cd to the parent directory and run Maven clean and Maven test in sequence:
 
-To run XMPP unit tests with your Google Talk account, do the following:
+    mvn clean
 
-    mvn test -Dxmpp-username="my_username@gmail.com" -Dxmpp-pass="blah"
-
-To see debug output from the XMPP stream, add the following flag:
-`-Dsmack.debugEnabled=true`
+    mvn test
 
 
-Alternatively, to run as a Java application, execute "setup" and "run" inside the terminal:
+If you simply want to run the application and test it out, run it in the terminal directly - cd to the parent directory and execute "setup" and "run" inside the terminal:
 
    ./setup
    
