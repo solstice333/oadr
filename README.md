@@ -28,6 +28,7 @@ start implementing OpenADR 2.0 services.
 ## Development, Build, Testing ##
 
 Eclipse IDE for Java EE Developers - http://www.eclipse.org/downloads/packages/eclipse-ide-java-ee-developers/keplersr1
+
 (Comes with Maven Integration)
 
 Note: Running Maven clean and then Maven compile, all within Eclipse, will cause resolution errors for classes that are correctly generated and/or existent within the correct package (seems to be a bug with the Maven plugin). To fix this, open the terminal, cd to the parent directory and run Maven clean and Maven test in sequence:
