@@ -1,8 +1,6 @@
 # EnerNOC OpenADR 2.0 Reference Implementation #
-----------------------------------------------------
 
-This is part of EnerNOC's open source reference implementation for the OpenADR 2.0 spec. Credit goes to Thom Nichols for the JAXB bindings,
-Packet Extension using Smack, and easy build management process via Maven. Original source code here:
+This is part of EnerNOC's open source reference implementation for the OpenADR 2.0 spec. Credit goes to Thom Nichols for oadr2-model and oadr2-xmpp submodules, and initial setup using Maven. Original source code here:
 
 https://github.com/EnerNOC/oadr2-ven
 
@@ -14,7 +12,6 @@ functionality (at least not yet.)  But it should provide enough at least for som
 start implementing OpenADR 2.0 services. 
 
 ## Modules ##
-----------------------------------------------------
 
 **oadr2-model** Simple JAXB Bindings
 
@@ -28,7 +25,6 @@ start implementing OpenADR 2.0 services.
 
 
 ## Development, Build, Testing ##
-----------------------------------------------------
 
 Eclipse IDE for Java EE Developers - http://www.eclipse.org/downloads/packages/eclipse-ide-java-ee-developers/keplersr1
 
@@ -47,8 +43,5 @@ If you simply want to run the application and test it out, run it in the termina
 
 
 ## License ##
-----------------------------------------------------
 
 This code is released under the Apache 2.0 software license. Please take it and use the code in your (commercial or open source) product. Contributions back to this project are also welcome!
-
-==================
