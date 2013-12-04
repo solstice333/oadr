@@ -62,7 +62,7 @@ public class PacketExtensionTest {
    // Hardcoded sample email and password
    static final String username = "openadrvtntest@gmail.com";
          //System.getProperty("xmpp-username");
-   static final String passwd = "openadrtest"; 
+   static final String passwd = "openadrtest";
          //System.getProperty("xmpp-pass");
    
    ConnectionConfiguration connConfig = new ConnectionConfiguration(

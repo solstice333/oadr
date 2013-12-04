@@ -1,4 +1,5 @@
 # EnerNOC OpenADR 2.0 Reference Implementation #
+----------------------------------------------------
 
 This is part of EnerNOC's open source reference implementation for the OpenADR 2.0 spec. Credit goes to Thom Nichols for the JAXB bindings,
 Packet Extension using Smack, and easy build management process via Maven. Original source code here:
@@ -13,6 +14,7 @@ functionality (at least not yet.)  But it should provide enough at least for som
 start implementing OpenADR 2.0 services. 
 
 ## Modules ##
+----------------------------------------------------
 
 **oadr2-model** Simple JAXB Bindings
 
@@ -26,16 +28,15 @@ start implementing OpenADR 2.0 services.
 
 
 ## Development, Build, Testing ##
+----------------------------------------------------
 
 Eclipse IDE for Java EE Developers - http://www.eclipse.org/downloads/packages/eclipse-ide-java-ee-developers/keplersr1
 
 (Comes with Maven Integration)
 
-Note: Running Maven clean and then Maven compile, all within Eclipse, will cause resolution errors for classes that are correctly generated and/or existent within the correct package (seems to be a bug with the Maven plugin). To fix this, open the terminal, cd to the parent directory and run Maven clean and Maven test in sequence:
+Note: Running Maven clean and then Maven compile, all within Eclipse, will cause resolution errors for classes that are correctly generated and/or existent within the correct package (seems to be a bug with the Maven plugin). To fix this, open the terminal, cd to the parent directory and run the setup script:
 
-    mvn clean
-
-    mvn test
+    ./setup
 
 
 If you simply want to run the application and test it out, run it in the terminal directly - cd to the parent directory and execute "setup" and "run" inside the terminal:
@@ -46,6 +47,7 @@ If you simply want to run the application and test it out, run it in the termina
 
 
 ## License ##
+----------------------------------------------------
 
 This code is released under the Apache 2.0 software license. Please take it and use the code in your (commercial or open source) product. Contributions back to this project are also welcome!
 

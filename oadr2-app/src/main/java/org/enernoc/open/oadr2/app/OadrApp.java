@@ -18,7 +18,7 @@ import org.jivesoftware.smack.XMPPException;
 import org.jivesoftware.smack.packet.IQ;
 import org.jivesoftware.smack.packet.Packet;
 
-//TODO rewrite this code with better organization later. Keep as is for now. 
+//TODO rewrite this code with better code separation when time permits. 
 //Just experimenting with Smack and sending IQ packets across different networks
 public class OadrApp {
    static String username;
@@ -45,7 +45,7 @@ public class OadrApp {
          venOperations();
       }
    }
-
+   
    private static void vtnOperations() throws DatatypeConfigurationException,
          JAXBException {
       @SuppressWarnings("resource")
@@ -53,13 +53,24 @@ public class OadrApp {
 
       // connect and add listener
       vtnConnect();
-      PacketListener oadrCreatedEventListener = new PacketListener() {
+
+      // local class definition implemented PacketListener interface
+      class OadrPacketListener implements PacketListener {
+         private String sentPacketID = null;
+
          @Override
          public void processPacket(Packet packet) {
-            printPacket(packet);
+            if (packet.getPacketID().equals(sentPacketID))
+               System.err.println("Error: Packet was not accepted by the client."
+                     + " Is it running OADR 2.0 VEN software?");
+            else
+               printPacket(packet);
          }
-      };
-      vtn.addPacketListener(oadrCreatedEventListener, new OADR2PacketFilter());
+      }
+      OadrPacketListener oadrCreatedEventListener = new OadrPacketListener();
+
+      vtn.addPacketListener((PacketListener) oadrCreatedEventListener,
+            new OADR2PacketFilter());
 
       // display roster, select contact
       while (true) {
@@ -129,6 +140,7 @@ public class OadrApp {
                OadrDistributeEvent ode = new OadrPayloadFactory()
                      .createEventPayload();
                IQ iq = connHandler.createIQ(to, ode);
+               oadrCreatedEventListener.sentPacketID = iq.getPacketID();
                vtn.sendPacket(iq);
 
                System.out
