@@ -46,6 +46,9 @@ import org.enernoc.open.oadr2.model.OadrDistributeEvent.OadrEvent;
 import org.enernoc.open.oadr2.model.Properties.Tolerance;
 import org.enernoc.open.oadr2.model.Properties.Tolerance.Tolerate;
 
+
+//TODO UUID for id's?
+//TODO get present time when creating an event
 /**
  * Factory class for instantiating an OadrEventDistribution object with a single
  * OadrEvent instance.

@@ -35,7 +35,7 @@ Note: Running Maven clean and then Maven compile, all within Eclipse, will cause
     ./setup
 
 
-If you simply want to run the application and test it out, run it in the terminal directly - cd to the parent directory and execute "setup" and "run" inside the terminal:
+If you simply want to run the application and test it out, run it in the terminal directly - cd to the parent directory and execute "setup" and "run" inside the terminal. Login with your gmail account in the username field:
 
     ./setup
    

@@ -16,7 +16,7 @@ public class OADR2PacketFilter implements PacketFilter {
 
    static final String OADR_XMLNS = OadrDistributeEvent.class.getAnnotation(
          XmlRootElement.class).namespace();
-
+   
    @Override
    public boolean accept(Packet packet) {
       // This namespace should match the filter used in smack.providers to

@@ -33,26 +33,38 @@ public class OadrApp {
          InterruptedException {
 
       XMPPConnection.DEBUG_ENABLED = true;
-      loginProcedure();
 
-      // vtn operations
-      if (!isVen) {
-         vtnOperations();
+      // attempt connecting to ven or vtn
+      boolean connected = false;
+      while (!connected) {
+         connected = true;
+         loginProcedure();
+
+         try {
+            if (isVen)
+               venConnect();
+            else
+               vtnConnect();
+         }
+         catch (XMPPException xe) {
+            connected = false;
+            System.out.println("\nError: Unable to connect. Try again\n");
+         }
       }
 
       // ven operations
-      else {
+      if (isVen)
          venOperations();
-      }
+
+      // vtn operations
+      else
+         vtnOperations();
    }
-   
+
    private static void vtnOperations() throws DatatypeConfigurationException,
          JAXBException {
       @SuppressWarnings("resource")
       Scanner s = new Scanner(System.in);
-
-      // connect and add listener
-      vtnConnect();
 
       // local class definition implemented PacketListener interface
       class OadrPacketListener implements PacketListener {
@@ -61,8 +73,9 @@ public class OadrApp {
          @Override
          public void processPacket(Packet packet) {
             if (packet.getPacketID().equals(sentPacketID))
-               System.err.println("Error: Packet was not accepted by the client."
-                     + " Is it running OADR 2.0 VEN software?");
+               System.out
+                     .println("Error: Packet was not accepted by the client."
+                           + " Is it running OADR 2.0 VEN software?");
             else
                printPacket(packet);
          }
@@ -77,8 +90,8 @@ public class OadrApp {
          try {
             connHandler.displayVtnRoster();
          }
-         catch (InterruptedException e1) {
-            e1.printStackTrace();
+         catch (InterruptedException ie) {
+            ie.printStackTrace();
          }
          System.out.println("------------------------");
          System.out
@@ -171,7 +184,6 @@ public class OadrApp {
    private static void venOperations() throws InterruptedException {
       @SuppressWarnings("resource")
       Scanner s = new Scanner(System.in);
-      venConnect();
 
       // add listener to ven
       PacketListener oadrDistributeEventListener = new PacketListener() {
@@ -266,46 +278,14 @@ public class OadrApp {
       return isVen;
    }
 
-   private static boolean vtnConnect() {
-      boolean pass = false;
-
-      while (!pass) {
-         try {
-            vtn = connHandler.connect(username, password, "talk.google.com",
-                  "vtn");
-            connHandler.setVtnConnection(vtn);
-            return true;
-         }
-         catch (XMPPException e) {
-            System.out.println("Login error. Invalid username or password."
-                  + "\nTry again:");
-            loginProcedure();
-            pass = vtnConnect();
-         }
-      }
-
-      return pass;
+   private static void vtnConnect() throws XMPPException {
+      vtn = connHandler.connect(username, password, "talk.google.com", "vtn");
+      connHandler.setVtnConnection(vtn);
    }
 
-   private static boolean venConnect() {
-      boolean pass = false;
-
-      while (!pass) {
-         try {
-            ven = connHandler.connect(username, password, "talk.google.com",
-                  "ven");
-            connHandler.setVenConnection(ven);
-            return true;
-         }
-         catch (XMPPException e) {
-            System.out.println("Login error. Invalid username or password."
-                  + "\nTry again:");
-            loginProcedure();
-            pass = venConnect();
-         }
-      }
-
-      return pass;
+   private static void venConnect() throws XMPPException {
+      ven = connHandler.connect(username, password, "talk.google.com", "ven");
+      connHandler.setVenConnection(ven);
    }
 
    private static void loginProcedure() {
@@ -313,14 +293,16 @@ public class OadrApp {
       Scanner s = new Scanner(System.in);
 
       System.out.println("login: ");
-      System.out.print("   username: ");
-      username = s.next();
-      System.out.print("   password: ");
-      password = s.next();
 
       // check if vtn or ven
       System.out.print("   ven or vtn? (Type 'ven' or 'vtn' to specify): ");
       isVen = VenOrVtn("Type 'ven' or 'vtn' to specify");
+
+      System.out.print("   username: ");
+      username = s.next();
+
+      System.out.print("   password: ");
+      password = s.next();
    }
 
    private static void printPacket(Packet packet) {
