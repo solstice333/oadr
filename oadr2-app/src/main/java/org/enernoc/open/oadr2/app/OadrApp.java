@@ -72,10 +72,19 @@ public class OadrApp {
 
          @Override
          public void processPacket(Packet packet) {
-            if (packet.getPacketID().equals(sentPacketID))
+            if (packet.getPacketID().equals(sentPacketID)) {
+               try {
+                  Thread.sleep(2000);
+               }
+               catch (InterruptedException e) {
+                  // TODO Auto-generated catch block
+                  e.printStackTrace();
+               }
+               
                System.out
                      .println("Error: Packet was not accepted by the client."
                            + " Is it running OADR 2.0 VEN software?");
+            }
             else
                printPacket(packet);
          }
