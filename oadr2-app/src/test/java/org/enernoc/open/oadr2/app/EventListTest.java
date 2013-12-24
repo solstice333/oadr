@@ -9,9 +9,17 @@ import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 
-public class EventList {
+import org.junit.Test;
 
-   public static void main(String[] args) throws DatatypeConfigurationException {
+/*
+ * Description: This code is to show as an example the comparison between Date/Time
+ * objects. Will end up using Comparator into Priority Queue to order events during
+ * runtime
+ */
+public class EventListTest {
+
+   @Test
+   public void eventListTest() throws DatatypeConfigurationException {
 	   DatatypeFactory fac = DatatypeFactory.newInstance();
 
       // This code block creates specifies date and time of when the event
@@ -38,8 +46,10 @@ public class EventList {
             TimeZone.getTimeZone("America/Los_Angeles"), Locale.US);
       GregorianCalendar gc2 = (GregorianCalendar) Calendar.getInstance(
             TimeZone.getTimeZone("America/Los_Angeles"), Locale.US);
-      gc2.set(2013, Calendar.DECEMBER, 31, 17, 35, 55);
+      gc2.set(2013, Calendar.DECEMBER, 23, 05, 41, 50);
       
+      System.out.println(gc1.getTime().toString());
+      System.out.println(gc2.getTime().toString());
       System.out.println(gc1.compareTo(gc2));
 
    }

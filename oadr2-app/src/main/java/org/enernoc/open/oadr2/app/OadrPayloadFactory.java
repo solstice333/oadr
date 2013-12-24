@@ -55,13 +55,13 @@ import org.enernoc.open.oadr2.model.Properties.Tolerance.Tolerate;
  */
 public class OadrPayloadFactory {
    // from defaults
-   private String requestID = "test-123";
+   private String requestID = "request";
    private String vtnID = "vtn-123";
 
    // to defaults
-   private String eventID = "event-1234";
-   private String venID = "ven-1234";
-   private String marketContext = "http://enernoc.com";
+   private String eventID = "event-123";
+   private String venID = "ven-123";
+   private String marketContext = "http://slice-energy.com";
 
    public OadrDistributeEvent createEventPayload()
          throws DatatypeConfigurationException {
@@ -74,8 +74,8 @@ public class OadrPayloadFactory {
 
       // add multiple OadrEvents here
       oadrEvents.add(createOadrEvent(this.eventID, ResponseRequiredType.ALWAYS));
-      oadrEvents.add(createOadrEvent("eventNever", ResponseRequiredType.NEVER));
-      oadrEvents.add(createOadrEvent("eventAlways1", ResponseRequiredType.ALWAYS));
+      //oadrEvents.add(createOadrEvent("eventNever", ResponseRequiredType.NEVER));
+      //oadrEvents.add(createOadrEvent("eventAlways1", ResponseRequiredType.ALWAYS));
 
       oadrDistrEvent.setOadrEvents(oadrEvents);
 
@@ -149,7 +149,7 @@ public class OadrPayloadFactory {
       DatatypeFactory xmlDatatypeFactory = DatatypeFactory.newInstance();
       final GregorianCalendar cal = (GregorianCalendar) Calendar.getInstance(
             TimeZone.getTimeZone("America/Los_Angeles"), Locale.US);
-      cal.set(2013, Calendar.MAY, 31, 17, 35, 55);
+      // TODO cal.set needs to be set by the user (put a scanner in here maybe)
       final XMLGregorianCalendar startDateTime = xmlDatatypeFactory
             .newXMLGregorianCalendar(cal);
 

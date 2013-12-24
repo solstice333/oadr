@@ -2,6 +2,8 @@ package org.enernoc.open.oadr2.app;
 
 import java.util.Random;
 
+// Description: This class is used as a placeholder for the scraper for testing
+// purposes.
 public class LMPGenerator {
    private int currentPrice;
    

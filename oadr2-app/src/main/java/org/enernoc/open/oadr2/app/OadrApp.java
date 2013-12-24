@@ -52,11 +52,9 @@ public class OadrApp {
          }
       }
 
-      // ven operations
+      // ven and vtn operations
       if (isVen)
          venOperations();
-
-      // vtn operations
       else
          vtnOperations();
    }
@@ -77,7 +75,6 @@ public class OadrApp {
                   Thread.sleep(2000);
                }
                catch (InterruptedException e) {
-                  // TODO Auto-generated catch block
                   e.printStackTrace();
                }
                
@@ -235,6 +232,7 @@ public class OadrApp {
 
             // creates IQ packet for oadrCreatedEvent and sends to vtn
             System.out.println("sending oadrCreatedEvent payload...");
+            
             try {
                IQ oceiq = new ConnHandler().createIQ(packet.getFrom(), oce);
                ven.sendPacket(oceiq);
@@ -322,18 +320,22 @@ public class OadrApp {
          System.exit(1);
       }
 
-      OADR2PacketExtension ope = (OADR2PacketExtension) packet
-            .getExtension(OADR2_xmlns);
-
+      // packet details (should be OADR2IQ)
       System.out.println("packet id: " + packet.getPacketID());
       System.out.println("packet from: " + packet.getFrom());
       System.out.println("packet class: " + packet.getClass());
       System.out.println("packet namespace: " + packet.getXmlns());
+      
+      // packet extension details (should be OADR2PacketExtension)
+      OADR2PacketExtension ope = (OADR2PacketExtension) packet
+            .getExtension(OADR2_xmlns);
+      
       System.out.println("packet extension class: " + ope.getClass());
       System.out.println("packet extension namespace: " + ope.getNamespace());
       System.out.println("packet extension element name: "
             + ope.getElementName());
 
+      // unpack payload (OadrCreatedEvent or OadrDistributeEvent)
       if (ope.getElementName().equals("oadrCreatedEvent")) {
          OadrCreatedEvent payload = (OadrCreatedEvent) ope.getPayload();
 
@@ -379,5 +381,4 @@ public class OadrApp {
 
       System.out.println();
    }
-
 }
