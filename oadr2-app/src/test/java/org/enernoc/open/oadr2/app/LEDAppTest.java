@@ -11,7 +11,7 @@ import org.junit.Test;
 /*
  * Description: Raspberry Pi GPIO test app
  */
-public class LEDTest {
+public class LEDAppTest {
 
    public static final String GPIO_OUT = "out";
    public static final int gpioPin = 2;
@@ -103,7 +103,7 @@ public class LEDTest {
             }
 
             // turn that LED on!
-            on.printf("%d", 1);
+            on.printf("%d", State.ON.getValue());
             on.close();
 
             break;
@@ -121,7 +121,7 @@ public class LEDTest {
             }
 
             // turn that LED off!
-            off.printf("%d", 0);
+            off.printf("%d", State.OFF.getValue());
             off.close();
 
             break;
