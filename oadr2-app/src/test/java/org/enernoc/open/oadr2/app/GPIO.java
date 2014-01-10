@@ -1,4 +1,4 @@
-//package org.enernoc.open.oadr2.app;
+package org.enernoc.open.oadr2.app;
 
 import java.io.Closeable;
 import java.io.File;
@@ -155,13 +155,33 @@ public class GPIO implements Closeable {
    }
 
    public State getState() {
-      return state;
+      if (dir == Dir.OUT)
+         return state;
+      else
+         return null;
    }
 
-   // TODO toggleOutputState
-   // TODO toggleDirection
-   
-   // TODO test readValue
+   public State toggleState() {
+      if (dir == Dir.OUT) {
+         if (state == State.OFF)
+            setOn();
+         else
+            setOff();
+
+         return state;
+      }
+      return null;
+   }
+
+   public Dir toggleDirection() {
+      if (dir == Dir.IN)
+         setDirection(Dir.OUT);
+      else
+         setDirection(Dir.IN);
+      
+      return dir;
+   }
+
    public int read() {
       if (dir == Dir.IN) {
          connectWithReadValueHandle();
@@ -179,9 +199,9 @@ public class GPIO implements Closeable {
       unexport.close();
       direction.close();
 
-      if (dir == Dir.OUT)
+      if (valueOut != null)
          valueOut.close();
-      else
+      if (valueIn != null)
          valueIn.close();
    }
 }

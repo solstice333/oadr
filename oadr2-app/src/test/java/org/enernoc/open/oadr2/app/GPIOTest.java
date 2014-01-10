@@ -1,4 +1,4 @@
-// package org.enernoc.open.oadr2.app;
+package org.enernoc.open.oadr2.app;
 
 import static org.junit.Assert.*;
 import junit.framework.Assert;
@@ -16,7 +16,7 @@ import org.junit.Test;
 public class GPIOTest {
 
    @Test
-   public void test() throws InterruptedException {
+   public void test() {
       // Test constructors
       GPIO outpin2 = new GPIO(2, Dir.OUT);
       Assert.assertEquals(2, outpin2.getPin());
@@ -65,7 +65,7 @@ public class GPIOTest {
 
          while (!quitInner) {
             System.out.println("Operations for outpin: " + "\n    -on (n)"
-                  + "\n    -off (f)" + "\n    -quit (q)");
+                  + "\n    -off (f)" + "\n    -toggle (t)" + "\n    -quit (q)");
 
             switch (s.nextLine().charAt(0)) {
             case 'n':
@@ -84,6 +84,10 @@ public class GPIOTest {
                   Assert.assertTrue(readpin.read() == 0);
 
                break;
+            case 't':  
+               State curr = outpin.getState();
+               Assert.assertFalse(outpin.toggleState().equals(curr));
+               break;
             case 'q':
                quitInner = true;
                break;
@@ -98,7 +102,5 @@ public class GPIOTest {
       outpin2.close();
       outpin4.close();
       readpin.close();
-
-      // TODO test setDirection()
    }
 }
