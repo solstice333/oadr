@@ -6,7 +6,7 @@ import org.junit.Test;
 /*
  * Description: junit test for testing URLConnectionAndDownload.java and Unzip.java
  */
-public class ScraperTestDriver {
+public class ScraperTest {
 
    @Test
    public void scraperTest() {

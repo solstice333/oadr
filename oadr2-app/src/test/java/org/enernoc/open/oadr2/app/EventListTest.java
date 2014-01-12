@@ -29,7 +29,7 @@ public class EventListTest {
       // parameters: year, month, date, hour, minute, second
       cal.set(2013, Calendar.MAY, 31, 17, 35, 55);
       XMLGregorianCalendar startdt = fac.newXMLGregorianCalendar(cal);
-      System.out.println(startdt);
+//      System.out.println(startdt);
 
       // This commented block retrieves all possible ID inputs to timezone
       /*
@@ -40,7 +40,7 @@ public class EventListTest {
       // This code block implements a way to retrieve a Comparable object
       GregorianCalendar gc = startdt.toGregorianCalendar(
             TimeZone.getTimeZone("America/Phoenix"), Locale.US, startdt);
-      System.out.println(gc);
+//      System.out.println(gc);
 
       GregorianCalendar gc1 = (GregorianCalendar) Calendar.getInstance(
             TimeZone.getTimeZone("America/Los_Angeles"), Locale.US);
@@ -48,9 +48,9 @@ public class EventListTest {
             TimeZone.getTimeZone("America/Los_Angeles"), Locale.US);
       gc2.set(2013, Calendar.DECEMBER, 23, 05, 41, 50);
       
-      System.out.println(gc1.getTime().toString());
-      System.out.println(gc2.getTime().toString());
-      System.out.println(gc1.compareTo(gc2));
+//      System.out.println(gc1.getTime().toString());
+//      System.out.println(gc2.getTime().toString());
+//      System.out.println(gc1.compareTo(gc2));
 
    }
 }
