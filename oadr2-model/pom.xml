@@ -95,6 +95,7 @@
 				</configuration>
 				<executions>
 					<execution>
+					   <phase>generate-sources</phase>
 						<id>oadr2-jaxb</id>
 						<goals>
 							<goal>generate</goal>

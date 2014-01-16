@@ -23,7 +23,7 @@ public class URLConnectionAndDownload {
       
       // instantiate URL connection to OASIS
       URLConnection oasis = new URL(
-            "http://oasis.caiso.com/mrtu-oasis/SingleZip?queryname=PRC_LMP&startdate=20130716&enddate=20130716&market_run_id=DAM&node=ANAHEIM_6_N001")
+            "http://oasis.caiso.com/mrtu-oasis/SingleZip?queryname=PRC_LMP&startdate=20140115&enddate=20140115&market_run_id=DAM&node=ANAHEIM_6_N001")
             .openConnection();
 
       // create input stream using URL connection

@@ -1,0 +1,682 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This schema conforms to OASIS Interface Specification v3.12.0 -->
+<xs:schema xmlns:m="http://oasis.caiso.com/mrtu-oasis/xsd/OASISReport.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://oasis.caiso.com/mrtu-oasis/xsd/OASISReport.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="OASISReport" type="m:OASISReport"/>
+	<xs:complexType name="OASISReport">
+		<xs:sequence>
+			<xs:element name="MessagePayload" type="m:MessagePayload"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="MessagePayload">
+		<xs:sequence>
+			<xs:element name="RTO" type="m:RTO">
+				<xs:annotation>
+					<xs:documentation/>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="RTO">
+		<xs:sequence>
+			<xs:element name="name" type="m:name">
+				<xs:annotation>
+					<xs:documentation/>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="REPORT_ITEM" type="m:REPORT_ITEM" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="DISCLAIMER_ITEM" type="m:DISCLAIMER_ITEMRq"/>
+			<xs:element name="ERROR" type="m:ERROR" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="name">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="CAISO"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="REPORT_ITEM">
+		<xs:sequence>
+			<xs:element name="REPORT_HEADER" type="m:REPORT_HEADEROASIS"/>
+			<xs:element name="REPORT_DATA" type="m:REPORT_DATAOASIS" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="REPORT_HEADEROASIS">
+		<xs:sequence>
+			<xs:element name="SYSTEM" type="m:SystemType"/>
+			<xs:element name="TZ" type="m:TimeZoneType"/>
+			<xs:element name="REPORT" type="m:OASISReportType"/>
+			<xs:element name="MKT_TYPE" type="m:OASISMarketType" nillable="true" minOccurs="0"/>
+			<xs:element name="EXECUTION_TYPE" type="m:OASISMarketType" nillable="true" minOccurs="0"/>
+			<xs:element name="CRR_MKT_NAME" type="xs:string" nillable="true" minOccurs="0"/>
+			<xs:element name="UOM" type="m:UOMType" nillable="true" minOccurs="0"/>
+			<xs:element name="INTERVAL" type="m:OASISIntervalType"/>
+			<xs:element name="SEC_PER_INTERVAL" type="xs:integer"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="SystemType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="OASIS"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TimeZoneType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="PPT"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="OASISReportType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="AS_RESULTS"/>
+			<xs:enumeration value="AS_OP_RSRV"/>
+			<xs:enumeration value="AS_REQ"/>
+			<xs:enumeration value="BIDS_PUBLIC"/>
+			<xs:enumeration value="CMMT_RA_MLC"/>
+			<xs:enumeration value="CMMT_RMR"/>
+			<xs:enumeration value="CRR_CLEARING"/>
+			<xs:enumeration value="CRR_INVENTORY"/>
+			<xs:enumeration value="ENE_EA"/>
+			<xs:enumeration value="ENE_SLRS"/>
+			<xs:enumeration value="ENE_HASP"/>
+			<xs:enumeration value="ENE_IFM"/>
+			<xs:enumeration value="ENE_MPM"/>
+			<xs:enumeration value="ATL_PEAK_ON_OFF"/>
+			<xs:enumeration value="ENE_RTM"/>
+			<xs:enumeration value="ENE_RUC"/>
+			<xs:enumeration value="ENE_LOSS"/>
+			<xs:enumeration value="ENE_DISP"/>
+			<xs:enumeration value="PRC_INTVL_AS"/>
+			<xs:enumeration value="PRC_FUEL"/>
+			<xs:enumeration value="PRC_LMP"/>
+			<xs:enumeration value="PRC_HASP_LMP"/>
+			<xs:enumeration value="PRC_AS"/>
+			<xs:enumeration value="PRC_CNSTR"/>
+			<xs:enumeration value="PRC_NOMOGRAM"/>
+			<xs:enumeration value="PRC_INTVL_LMP"/>
+			<xs:enumeration value="PRC_HRLY_CNSTR"/>
+			<xs:enumeration value="PRC_INTVL_CNSTR"/>
+			<xs:enumeration value="PRC_CURR_LMP"/>
+			<xs:enumeration value="PRC_CURR_HUB_LMP"/>
+			<xs:enumeration value="PRC_ADV_LMP"/>
+			<xs:enumeration value="PRC_RTM_FLOWGATE"/>
+			<xs:enumeration value="PRC_RTM_NOMOGRAM"/>
+			<xs:enumeration value="PRC_ADV_LMP"/>
+			<xs:enumeration value="SLD_FCST"/>
+			<xs:enumeration value="SLD_FCST_PEAK"/>
+			<xs:enumeration value="SLD_MKTS"/>
+			<xs:enumeration value="TRNS_ATC"/>
+			<xs:enumeration value="TRNS_OUTAGE"/>
+			<xs:enumeration value="TRNS_USAGE"/>
+			<xs:enumeration value="TRNS_CURR_USAGE"/>
+			<xs:enumeration value="PRC_DS_REF"/>
+			<xs:enumeration value="ENE_CB_AWARDS"/>
+			<xs:enumeration value="ENE_CB_CLR_AWARDS"/>
+			<xs:enumeration value="ENE_CB_MKT_SUM"/>
+			<xs:enumeration value="PRC_REF_PRICES"/>
+			<xs:enumeration value="CB_NODAL_GRP_CNSTR_PRC"/>
+			<xs:enumeration value="CB_NODAL_LIMITS"/>
+			<xs:enumeration value="PRC_FLEX_RAMP"/>
+			<xs:enumeration value="PRC_CD_INTVL_LMP"/>
+			<xs:enumeration value="PRC_CD_RTM_FLOWGATE"/>
+			<xs:enumeration value="PRC_CD_RTM_NOMOGRAM"/>
+			<xs:enumeration value="ENE_CD_SLRS"/>
+			<xs:enumeration value="PRC_MPM_CNSTR"/>
+			<xs:enumeration value="PRC_MPM_CNSTR_CMP"/>
+			<xs:enumeration value="PRC_MPM_NOMOGRAM"/>
+			<xs:enumeration value="PRC_MPM_NOMOGRAM_CMP"/>
+			<xs:enumeration value="PRC_MPM_RTM_FLOWGATE"/>
+			<xs:enumeration value="PRC_MPM_RTM_FLOWGATE_CMP"/>
+			<xs:enumeration value="PRC_MPM_LMP"/>
+			<xs:enumeration value="PRC_MPM_RTM_LMP"/>
+			<xs:enumeration value="PRC_MPM_RTM_NOMOGRAM"/>
+			<xs:enumeration value="PRC_MPM_RTM_NOMOGRAM_CMP"/>
+			<xs:enumeration value="PRC_MPM_RTM_REF_BUS"/>
+			<xs:enumeration value="PRC_MPM_REF_BUS"/>
+			<!-- Added for 2012 Fall Release -->
+			<xs:enumeration value="PUB_CRR_BID"/>			
+			<xs:enumeration value="SLD_REN_FCST"/>
+			<xs:enumeration value="AGGR_OUTAGE_SCH"/>
+			<xs:enumeration value="PRC_GHG_ALLOWANCE"/>
+			<!-- Added for 2013 Fall Release -->
+			<xs:enumeration value="AS_MILEAGE_CALC"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="OASISMarketType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="RUC"/>
+			<xs:enumeration value="ACTUAL"/>
+			<xs:enumeration value="HASP"/>
+			<xs:enumeration value="RTM"/>
+			<xs:enumeration value="DAM"/>
+			<xs:enumeration value="2DA"/>
+ 			<xs:enumeration value="N/A"/>
+			<xs:enumeration value="ALL"/>
+			<xs:enumeration value="TOTAL"/>
+			<xs:enumeration value="FCST"/>
+			<xs:enumeration value="RTPD"/>
+			<xs:enumeration value="RTD"/>
+			<!-- Added for 2013 Fall Release -->
+			<xs:enumeration value="7DA"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="UOMType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="MW"/>
+			<xs:enumeration value="MWh"/>
+			<xs:enumeration value="US$"/>
+			<xs:enumeration value="%"/>
+			<xs:enumeration value="INTEGER"/>
+			<xs:enumeration value="FLAG"/>
+			<xs:enumeration value="$/mmBTU"/>
+			<xs:enumeration value="$/lb"/>
+			<xs:enumeration value="US$/MW"/>
+			<xs:enumeration value="US$/MWh"/>
+			<xs:enumeration value="FACTOR"/>
+			<xs:enumeration value="NODE"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="OASISIntervalType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="BEGINNING"/>
+			<xs:enumeration value="ENDING"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="REPORT_DATAOASIS">
+		<xs:sequence>
+			<xs:element name="DATA_ITEM" type="m:OASISDataItems"/>
+			<xs:element name="SOURCE" type="xs:string" nillable="true" minOccurs="0"/>
+			<xs:element name="SINK" type="xs:string" nillable="true" minOccurs="0"/>
+			<xs:element name="RESOURCE_NAME" type="xs:string" nillable="true" minOccurs="0"/>
+			<xs:element name="DIRECTION" type="xs:string" nillable="true" minOccurs="0"/>
+			<xs:element name="OPR_DATE" type="xs:date" nillable="true" minOccurs="0"/>
+			<xs:element name="GAS_FLOW_DATE" type="xs:date" nillable="true" minOccurs="0"/>
+			<xs:element name="INTERVAL_NUM" type="xs:integer" nillable="true" minOccurs="0"/>
+			<xs:element name="PHYSICAL_TYPE" type="xs:string" nillable="true" minOccurs="0"/>
+			<xs:element name="MAXIMUM_LIMIT" type="xs:double" nillable="true" minOccurs="0"/>
+			<xs:element name="MINIMUM_LIMIT" type="xs:double" nillable="true" minOccurs="0"/>
+			<xs:element name="LIMIT_TYPE" type="xs:string" nillable="true" minOccurs="0"/>
+			<xs:element name="CONSTRAINT_GROUP_NAME" type="xs:string" nillable="true" minOccurs="0"/>
+			<xs:element name="VALUE" type="xs:double" nillable="true" minOccurs="0"/>
+			<xs:element name="SVALUE" type="xs:string" nillable="true" minOccurs="0"/>
+			<xs:element name="OPTION" type="xs:string" nillable="true" minOccurs="0"/>
+			<xs:element name="INVENTORY_DATE_TIME" type="xs:dateTime" nillable="true" minOccurs="0"/>
+			<xs:element name="START_DATE" type="xs:date" nillable="true" minOccurs="0"/>
+			<xs:element name="START_DATE_TIME" type="xs:dateTime" nillable="true" minOccurs="0"/>
+			<xs:element name="END_DATE" type="xs:date" nillable="true" minOccurs="0"/>
+			<xs:element name="END_DATE_TIME" type="xs:dateTime" nillable="true" minOccurs="0"/>
+		 	<xs:element name="MKT_START_HE" type="xs:integer" nillable="true" minOccurs="0"/>
+			<xs:element name="START_HE" type="xs:integer" nillable="true" minOccurs="0"/>
+			<xs:element name="END_HE" type="xs:integer" nillable="true" minOccurs="0"/>
+			<xs:element name="REASON" type="xs:string" nillable="true" minOccurs="0"/>
+			<xs:element name="NOTES" type="xs:string" nillable="true" minOccurs="0"/>
+			<xs:element name="STATUS_TYPE" type="xs:string" nillable="true" minOccurs="0"/>
+			<xs:element name="CATEGORY" type="xs:string" nillable="true" minOccurs="0"/>
+			<xs:element name="PUBLISH_TIME" type="xs:dateTime" nillable="true" minOccurs="0"/>
+			<xs:element name="CRR_NSR" type="xs:double" nillable="true" minOccurs="0"/>
+			<xs:element name="CRR_OPTION" type="xs:string" nillable="true" minOccurs="0"/>
+			<xs:element name="CRR_SEGMENT" type="xs:string" nillable="true" minOccurs="0"/>
+			<xs:element name="EFF_QTR_START_DT" type="xs:dateTime" nillable="true" minOccurs="0"/>
+			<xs:element name="EFF_QTR_END_DT" type="xs:dateTime" nillable="true" minOccurs="0"/>
+			<xs:element name="MKT_RUN_START_TIME" type="xs:dateTime" nillable="true" minOccurs="0"/>
+			<xs:element name="INT_START_TIME" type="xs:dateTime" nillable="true" minOccurs="0"/>
+			<!-- Added for 2012 Fall Release -->
+			<xs:element name="REPORT_DATE" type="xs:date" minOccurs="0"/>
+			<xs:element name="OUTAGE_DATE" type="xs:date" minOccurs="0"/>
+			<xs:element name="OUTAGE_HOUR" type="xs:integer" nillable="true" minOccurs="0"/>
+			<xs:element name="TRADING_HUB" type="xs:string" minOccurs="0"/>
+			<xs:element name="FUEL_CATEGORY" type="xs:string" minOccurs="0"/>
+			<xs:element name="RENEWABLE_TYPE" type="xs:string" minOccurs="0"/>
+			<!-- Added for 2013 Fall Release -->
+			<xs:element name="INT_OPR_HR" type="xs:integer" nillable="true" minOccurs="0"/>
+ 		</xs:sequence>
+	</xs:complexType>
+  	<xs:simpleType name="OASISDataItems">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NS_REQ_MAX_MW"/>
+			<xs:enumeration value="RD_REQ_MAX_MW"/>
+			<xs:enumeration value="RU_REQ_MAX_MW"/>
+			<xs:enumeration value="SP_REQ_MAX_MW"/>
+			<xs:enumeration value="RMD_REQ_MAX_MW"/>
+			<xs:enumeration value="RMU_REQ_MAX_MW"/>
+			<xs:enumeration value="NS_REQ_MIN_MW"/>
+			<xs:enumeration value="RD_REQ_MIN_MW"/>
+			<xs:enumeration value="RU_REQ_MIN_MW"/>
+			<xs:enumeration value="SP_REQ_MIN_MW"/>
+			<xs:enumeration value="RMD_REQ_MIN_MW"/>
+			<xs:enumeration value="RMU_REQ_MIN_MW"/>
+			<xs:enumeration value="AS_REQ_MAX_MW"/>
+			<xs:enumeration value="AS_REQ_MIN_MW"/>
+			<xs:enumeration value="TOT_GEN_MW"/>
+			<xs:enumeration value="TOT_LOAD_MW"/>
+			<xs:enumeration value="TOT_IMP_MW"/>
+			<xs:enumeration value="TOT_EXP_MW"/>
+			<xs:enumeration value="ISO_TOT_GEN_MW"/>
+			<xs:enumeration value="ISO_TOT_LOAD_MW"/>
+			<xs:enumeration value="ISO_TOT_IMP_MW"/>
+			<xs:enumeration value="ISO_TOT_EXP_MW"/>
+			<xs:enumeration value="ISO_TOTAL_MWH"/>
+			<xs:enumeration value="DASE_MWH"/>
+			<xs:enumeration value="DSSE_MWH"/>
+			<xs:enumeration value="DABE_MWH"/>
+			<xs:enumeration value="DAPE_MWH"/>
+			<xs:enumeration value="OE_MWH"/>
+			<xs:enumeration value="HASE_MWH"/>
+			<xs:enumeration value="SRE_MWH"/>
+			<xs:enumeration value="RED_MWH"/>
+			<xs:enumeration value="EDE_MWH"/>
+			<xs:enumeration value="RMRE_MWH"/>
+			<xs:enumeration value="MSSLFE_MWH"/>
+			<xs:enumeration value="RE_MWH"/>
+			<xs:enumeration value="RIE_MWH"/>
+			<xs:enumeration value="MLE_MWH"/>
+			<xs:enumeration value="SE_MWH"/>
+			<xs:enumeration value="DRE_MWH"/>
+			<xs:enumeration value="RTSSE_MWH"/>
+			<xs:enumeration value="DMLE_MWH"/>
+			<xs:enumeration value="DAMLE_MWH"/>
+			<xs:enumeration value="PE_MWH"/>
+			<xs:enumeration value="TEE_MWH"/>
+			<xs:enumeration value="LFE_MWH"/>
+			<xs:enumeration value="SYSEMR_MWH"/>
+			<xs:enumeration value="RMRR_MWH"/>
+			<xs:enumeration value="RMRS_MWH"/>
+			<xs:enumeration value="RMRT_MWH"/>
+			<xs:enumeration value="BS_MWH"/>
+			<xs:enumeration value="VS_MWH"/>
+			<xs:enumeration value="SLIC_MWH"/>
+			<xs:enumeration value="TORETC_MWH"/>
+			<xs:enumeration value="TEMR_MWH"/>
+			<xs:enumeration value="TMODEL_MWH"/>
+			<xs:enumeration value="TMODEL1_MWH"/>
+			<xs:enumeration value="TMODEL2_MWH"/>
+			<xs:enumeration value="TMODEL3_MWH"/>
+			<xs:enumeration value="TMODEL4_MWH"/>
+			<xs:enumeration value="TMODEL5_MWH"/>
+			<xs:enumeration value="TMODEL6_MWH"/>
+			<xs:enumeration value="TMODEL7_MWH"/>
+			<xs:enumeration value="RMRC2_MWH"/>
+			<xs:enumeration value="RMRRC2_MWH"/>
+			<xs:enumeration value="SYSEMR1_MWH"/>
+			<xs:enumeration value="SYSEMR2_MWH"/>
+			<xs:enumeration value="TORETC1_MWH"/>
+			<xs:enumeration value="OTHER_MWH"/>
+			<xs:enumeration value="OTHERS_MWH"/>
+			<xs:enumeration value="NONTMOD_MWH"/>
+			<xs:enumeration value="ASTEST_MWH"/>
+			<xs:enumeration value="PRETEST_MWH"/>
+			<xs:enumeration value="LMP_CONG_PRC"/>
+			<xs:enumeration value="LMP_CONG_CC_PRC"/>
+			<xs:enumeration value="LMP_CONG_NC_PRC"/>
+			<xs:enumeration value="LMP_ENE_PRC"/>
+			<xs:enumeration value="LMP_LOSS_PRC"/>
+			<xs:enumeration value="LMP_PRC"/>
+			<xs:enumeration value="SYS_FCST_DA_MW"/>
+			<xs:enumeration value="SYS_FCST_2DA_MW"/>
+			<xs:enumeration value="SYS_FCST_ACT_MW"/>
+			<xs:enumeration value="SYS_FCST_5MIN_MW"/>
+			<xs:enumeration value="SYS_PEAK_MW"/>
+			<xs:enumeration value="ATC_MW"/>
+			<xs:enumeration value="AS_IMPORT_MW"/>
+			<xs:enumeration value="ENE_IMPORT_MW"/>
+			<xs:enumeration value="CBM_MW"/>
+			<xs:enumeration value="OTC_MW"/>
+			<xs:enumeration value="TTC_MW"/>
+			<xs:enumeration value="CONSTRAINT_MW"/>
+			<xs:enumeration value="ENTLEMTS_MW"/>
+			<xs:enumeration value="USEAGE_MW"/>
+			<xs:enumeration value="OUTAGE_LIMIT_MW"/>
+			<xs:enumeration value="ST_ON_PRC"/>
+			<xs:enumeration value="ST_OFF_PRC"/>
+			<xs:enumeration value="LT_ON_PRC"/>
+			<xs:enumeration value="LT_OFF_PRC"/>
+			<xs:enumeration value="ON_PRC"/>
+			<xs:enumeration value="OFF_PRC"/>
+			<xs:enumeration value="OP_RSRV_ACT_PCT"/>
+			<xs:enumeration value="NS_CLR_PRC"/>
+			<xs:enumeration value="RD_CLR_PRC"/>
+			<xs:enumeration value="RU_CLR_PRC"/>
+			<xs:enumeration value="SP_CLR_PRC"/>
+			<xs:enumeration value="RMD_CLR_PRC"/>
+			<xs:enumeration value="RMU_CLR_PRC"/>
+			<xs:enumeration value="SHADOW_PRC"/>
+			<xs:enumeration value="NS_PROC_MW"/>
+			<xs:enumeration value="NS_SPROC_MW"/>
+			<xs:enumeration value="NS_TOT_MW"/>
+			<xs:enumeration value="NS_IMP_MW"/>
+			<xs:enumeration value="NS_GEN_MW"/>
+			<xs:enumeration value="NS_DMD_MW"/>
+			<xs:enumeration value="NS_TOT_CST_PRC"/>
+			<xs:enumeration value="ISO_TOT_CST_PRC"/>
+			<xs:enumeration value="NS_ISO_TOT_CST_PRC"/>
+			<xs:enumeration value="NS_AVG_ASMP_PRC"/>
+			<xs:enumeration value="NS_ISO_AVG_ASMP_PRC"/>
+			<xs:enumeration value="SP_PROC_MW"/>
+			<xs:enumeration value="SP_SPROC_MW"/>
+			<xs:enumeration value="SP_TOT_MW"/>
+			<xs:enumeration value="SP_IMP_MW"/>
+			<xs:enumeration value="SP_GEN_MW"/>
+			<xs:enumeration value="SP_DMD_MW"/>
+			<xs:enumeration value="SP_TOT_CST_PRC"/>
+			<xs:enumeration value="SP_AVG_ASMP_PRC"/>
+			<xs:enumeration value="SP_ISO_TOT_CST_PRC"/>
+			<xs:enumeration value="SP_ISO_AVG_ASMP_PRC"/>
+			<xs:enumeration value="RU_PROC_MW"/>
+			<xs:enumeration value="RU_SPROC_MW"/>
+			<xs:enumeration value="RU_TOT_MW"/>
+			<xs:enumeration value="RU_IMP_MW"/>
+			<xs:enumeration value="RU_GEN_MW"/>
+			<xs:enumeration value="RU_DMD_MW"/>
+			<xs:enumeration value="RU_TOT_CST_PRC"/>
+			<xs:enumeration value="RU_AVG_ASMP_PRC"/>
+			<xs:enumeration value="RU_ISO_TOT_CST_PRC"/>
+			<xs:enumeration value="RU_ISO_AVG_ASMP_PRC"/>
+			<xs:enumeration value="RD_PROC_MW"/>
+			<xs:enumeration value="RD_SPROC_MW"/>
+			<xs:enumeration value="RD_TOT_MW"/>
+			<xs:enumeration value="RD_IMP_MW"/>
+			<xs:enumeration value="RD_GEN_MW"/>
+			<xs:enumeration value="RD_DMD_MW"/>
+			<xs:enumeration value="RD_TOT_CST_PRC"/>
+			<xs:enumeration value="RD_AVG_ASMP_PRC"/>
+			<xs:enumeration value="RD_ISO_TOT_CST_PRC"/>
+			<xs:enumeration value="RD_ISO_AVG_ASMP_PRC"/>
+			<xs:enumeration value="RMD_PROC_MW"/>
+			<xs:enumeration value="RMD_SPROC_MW"/>
+			<xs:enumeration value="RMD_TOT_MW"/>
+ 			<xs:enumeration value="RMD_TOT_CST_PRC"/>
+			<xs:enumeration value="RMU_PROC_MW"/>
+			<xs:enumeration value="RMU_SPROC_MW"/>
+			<xs:enumeration value="RMU_TOT_MW"/>
+ 			<xs:enumeration value="RMU_TOT_CST_PRC"/>
+			<xs:enumeration value="FUEL_PRC"/>
+			<xs:enumeration value="TOT_CAP_USED_MW"/>
+			<xs:enumeration value="DISPATCH_MW"/>
+			<xs:enumeration value="TOT_AVAIL_MW"/>
+			<xs:enumeration value="DETER_MW"/>
+			<xs:enumeration value="RA_CAP_COMM_MW"/>
+			<xs:enumeration value="MIN_LD_MW"/>
+			<xs:enumeration value="RA_MLC_PRC"/>
+			<xs:enumeration value="MIN_LD_MLC_PRC"/>
+			<xs:enumeration value="TOT_STRT_CST_PRC"/>
+			<xs:enumeration value="RA_STRT_PRC"/>
+			<xs:enumeration value="RA_COMM_UNITS_CNT"/>
+			<xs:enumeration value="TOT_COMM_UNITS_CNT"/>
+			<xs:enumeration value="TOT_COMM_CAP_MW"/>
+			<xs:enumeration value="TOT_LOSS_PRC"/>
+			<xs:enumeration value="TOT_LOSS_MW"/>
+			<xs:enumeration value="MPM_STATUS_FLG"/>
+			<xs:enumeration value="MPM_CMP_STATUS_FLG"/>
+			<xs:enumeration value="EXPT_DIS_PRC"/>
+			<xs:enumeration value="EXPT_DIS_MWH"/>
+			<xs:enumeration value="AS_CLEAR_ASMP_RTM"/>
+			<xs:enumeration value="AS_CLEAR_COST_IFM"/>
+			<xs:enumeration value="AS_CLEAR_COST_RTM"/>
+			<xs:enumeration value="AS_CLEAR_MW_IFM"/>
+			<xs:enumeration value="AS_CLEAR_MW_RTM"/>
+			<xs:enumeration value="AS_GEN_TOTAL_MW_IFM"/>
+			<xs:enumeration value="AS_GEN_TOTAL_MW_RTM"/>
+			<xs:enumeration value="AS_IMP_TOTAL_MW_IFM"/>
+			<xs:enumeration value="AS_IMP_TOTAL_MW_RTM"/>
+			<xs:enumeration value="AS_LOAD_TOTAL_MW_IFM"/>
+			<xs:enumeration value="AS_LOAD_TOTAL_MW_RTM"/>
+			<xs:enumeration value="AS_REGION_value"/>
+			<xs:enumeration value="AS_REGION_REQ_MAX"/>
+			<xs:enumeration value="AS_REGION_REQ_MIN"/>
+			<xs:enumeration value="AS_SELF_MW_IFM"/>
+			<xs:enumeration value="AS_SELF_MW_RTM"/>
+			<xs:enumeration value="AS_TOTAL_MW"/>
+			<xs:enumeration value="AS_TOTAL_MW_IFM"/>
+			<xs:enumeration value="AS_TOTAL_MW_RTM"/>
+			<xs:enumeration value="AS_TYPE"/>
+			<xs:enumeration value="AS_USER_RATE"/>
+			<xs:enumeration value="CA_value"/>
+			<xs:enumeration value="CMMT_MINLOAD_MLC"/>
+			<xs:enumeration value="CMMT_TOTAL_MINLOAD_MLC"/>
+			<xs:enumeration value="CMMT_TOTAL_RA_MINLOAD_MLC"/>
+			<xs:enumeration value="CMMT_MINLOAD_MW"/>
+			<xs:enumeration value="CMMT_RA_MLC"/>
+			<xs:enumeration value="CMMT_RA_MINLOAD_MW"/>
+			<xs:enumeration value="CMMT_RA_TOTAL_MINLOAD_MW"/>
+			<xs:enumeration value="CMMT_TOTAL_MINLOAD_MW"/>
+			<xs:enumeration value="CMMT_RA_MINLOAD_MLC"/>
+			<xs:enumeration value="CMMT_START_COST"/>
+			<xs:enumeration value="CMMT_RA_START_COST"/>
+			<xs:enumeration value="CMMT_TOTAL_START_COST"/>
+			<xs:enumeration value="CMMT_RA_TOTAL_START_COST"/>
+			<xs:enumeration value="CMMT_RA_UNITS"/>
+			<xs:enumeration value="CMMT_UNITS"/>
+			<xs:enumeration value="CMMT_TOTAL_START_COST"/>
+			<xs:enumeration value="CMMT_TOTAL_MW"/>
+			<xs:enumeration value="CMMT_TOTAL_UNITS"/>
+			<xs:enumeration value="CMMT_RA_TOTAL_UNITS"/>
+			<xs:enumeration value="CMMT_CAP_MW"/>
+			<xs:enumeration value="CMMT_TOTAL_CAP_MW"/>
+			<xs:enumeration value="CMMT_RA_TOTAL_CAP_MW"/>
+			<xs:enumeration value="CMMT_RA_CAP_MW"/>
+			<xs:enumeration value="CRR_CAT"/>
+			<xs:enumeration value="CRR_ID"/>
+			<xs:enumeration value="CRR_MARKET_value"/>
+			<xs:enumeration value="CRR_MW"/>
+			<xs:enumeration value="CRR_NSR"/>
+			<xs:enumeration value="CRR_MARKET_TERM"/>
+			<xs:enumeration value="CRR_OPTION"/>
+			<xs:enumeration value="CRR_OWNER"/>
+			<xs:enumeration value="CRR_SEGMENT"/>
+			<xs:enumeration value="CRR_TERM"/>
+			<xs:enumeration value="CRR_TOU"/>
+			<xs:enumeration value="CRR_TYPE"/>
+			<xs:enumeration value="ENE_EA_DA"/>
+			<xs:enumeration value="ENE_EA_EXCEPT"/>
+			<xs:enumeration value="ENE_EA_HASP"/>
+			<xs:enumeration value="ENE_EA_MLE"/>
+			<xs:enumeration value="ENE_EA_MSSLF"/>
+			<xs:enumeration value="ENE_EA_OPTIMAL"/>
+			<xs:enumeration value="ENE_EA_RAMP_DEV"/>
+			<xs:enumeration value="ENE_EA_RAMP_STD"/>
+			<xs:enumeration value="ENE_EA_RESIDUAL"/>
+			<xs:enumeration value="ENE_EA_RMR"/>
+			<xs:enumeration value="ENE_EA_SELF"/>
+			<xs:enumeration value="ENE_EA_SLIC"/>
+			<xs:enumeration value="ENE_EXP_CLEAR_HASP"/>
+			<xs:enumeration value="ENE_EXP_CLEAR_IFM"/>
+			<xs:enumeration value="ENE_EXP_CLEAR_RTM"/>
+			<xs:enumeration value="ENE_GEN_CLEAR_HASP"/>
+			<xs:enumeration value="ENE_GEN_CLEAR_IFM"/>
+			<xs:enumeration value="ENE_GEN_CLEAR_RTM"/>
+			<xs:enumeration value="ENE_IMP_CLEAR_HASP"/>
+			<xs:enumeration value="ENE_IMP_CLEAR_IFM"/>
+			<xs:enumeration value="ENE_IMP_CLEAR_RTM"/>
+			<xs:enumeration value="ENE_LOAD_ACTUAL"/>
+			<xs:enumeration value="ENE_LOAD_CLEAR_HASP"/>
+			<xs:enumeration value="ENE_LOAD_CLEAR_IFM"/>
+			<xs:enumeration value="ENE_LOAD_CLEAR_RTM"/>
+			<xs:enumeration value="ENE_LOAD_FCST"/>
+			<xs:enumeration value="ENE_PEAK_HOUR"/>
+			<xs:enumeration value="ENE_PEAK_LOAD"/>
+			<xs:enumeration value="FUEL_REGION_value"/>
+			<xs:enumeration value="INVT_DATETIME"/>
+			<xs:enumeration value="LOAD_ACTUAL"/>
+			<xs:enumeration value="LOAD_CLEAR_RTM"/>
+			<xs:enumeration value="LOSS_TOTAL_COST_HASP"/>
+			<xs:enumeration value="LOSS_TOTAL_COST_RTM"/>
+			<xs:enumeration value="LOSS_TOTAL_MW_HASP"/>
+			<xs:enumeration value="LOSS_TOTAL_MW_RTM"/>
+			<xs:enumeration value="MPM_FLAG"/>
+			<xs:enumeration value="OP_RSRV_TOTAL"/>
+			<xs:enumeration value="PRC_NG"/>
+			<xs:enumeration value="PRC_SHADOW"/>
+			<xs:enumeration value="RMR_DETER_DAM"/>
+			<xs:enumeration value="RMR_DETER_HASP"/>
+			<xs:enumeration value="RMR_DISPATCH_DAM"/>
+			<xs:enumeration value="RMR_DISPATCH_HASP"/>
+			<xs:enumeration value="RMR_TOTAL"/>
+			<xs:enumeration value="RMR_TOTAL_AVAIL"/>
+			<xs:enumeration value="RUC_GEN_CLEAR_RUC"/>
+			<xs:enumeration value="RUC_IMP_CLEAR_RUC"/>
+			<xs:enumeration value="RUC_LOAD_CLEAR_RUC"/>
+			<xs:enumeration value="RUC_ZONE_value"/>
+			<xs:enumeration value="TAC_AREA_value"/>
+			<xs:enumeration value="TINTRFCE_value"/>
+			<xs:enumeration value="TRNS_AS_IMPORT"/>
+			<xs:enumeration value="TRNS_ENE_IMPORT"/>
+			<xs:enumeration value="TRNS_EQUIP_value"/>
+			<xs:enumeration value="TRNS_RATING_CBM"/>
+			<xs:enumeration value="TRNS_RATING_DIRECTION"/>
+			<xs:enumeration value="TRNS_RATING_OTC"/>
+			<xs:enumeration value="TRNS_RATING_OTC_DERATE"/>
+			<xs:enumeration value="TRNS_RATING_TTC"/>
+			<xs:enumeration value="TRNS_TI_value"/>
+			<xs:enumeration value="TRNS_TR_ENTMTS"/>
+			<xs:enumeration value="TRNS_TR_USEAGE"/>
+			<xs:enumeration value="ATL_PEAK_ON_OFF_FLG"/>
+			<xs:enumeration value="SPLY_PRC"/>
+			<xs:enumeration value="DMD_PRC"/>
+			<xs:enumeration value="ISO_TOT_SPLY_MW"/>
+			<xs:enumeration value="ISO_TOT_DMD_MW"/>
+			<xs:enumeration value="ENE_CB_CLR_MW"/>
+			<xs:enumeration value="DMD_SLF_ENE_SUB_MW"/>
+			<xs:enumeration value="DMD_SLF_ENE_CLR_MW"/>
+			<xs:enumeration value="DMD_SLF_CLR_CST"/>
+			<xs:enumeration value="DMD_ENE_SUB_MW"/>
+			<xs:enumeration value="DMD_ENE_SUB_CST"/>
+			<xs:enumeration value="DMD_ENE_CLR_MW"/>
+			<xs:enumeration value="DMD_ENE_CLR_CST"/>
+			<xs:enumeration value="DMD_VIR_ENE_SUB_MW"/>
+			<xs:enumeration value="DMD_VIR_SUB_CST"/>
+			<xs:enumeration value="DMD_VIR_ENE_CLR_MW"/>
+			<xs:enumeration value="DMD_VIR_CLR_CST"/>
+			<xs:enumeration value="DMD_TOT_ENE_SUB_MW"/>
+			<xs:enumeration value="DMD_TOT_SUB_CST"/>
+			<xs:enumeration value="DMD_TOT_ENE_CLR_MW"/>
+			<xs:enumeration value="DMD_TOT_CLR_CST"/>
+			<xs:enumeration value="SPLY_SLF_ENE_SUB_MW"/>
+			<xs:enumeration value="SPLY_SLF_ENE_CLR_MW"/>
+			<xs:enumeration value="SPLY_SLF_CLR_CST"/>
+			<xs:enumeration value="SPLY_ENE_SUB_MW"/>
+			<xs:enumeration value="SPLY_ENE_SUB_CST"/>
+			<xs:enumeration value="SPLY_ENE_CLR_MW"/>
+			<xs:enumeration value="SPLY_ENE_CLR_CST"/>
+			<xs:enumeration value="SPLY_VIR_ENE_SUB_MW"/>
+			<xs:enumeration value="SPLY_VIR_SUB_CST"/>
+			<xs:enumeration value="SPLY_VIR_ENE_CLR_MW"/>
+			<xs:enumeration value="SPLY_VIR_CLR_CST"/>
+			<xs:enumeration value="SPLY_TOT_ENE_SUB_MW"/>
+			<xs:enumeration value="SPLY_TOT_SUB_CST"/>
+			<xs:enumeration value="SPLY_TOT_ENE_CLR_MW"/>
+			<xs:enumeration value="SPLY_TOT_CLR_CST"/>
+			<xs:enumeration value="EXP_SLF_ENE_SUB_MW"/>
+			<xs:enumeration value="EXP_SLF_ENE_CLR_MW"/>
+			<xs:enumeration value="EXP_SLF_CLR_CST"/>
+			<xs:enumeration value="EXP_ENE_SUB_MW"/>
+			<xs:enumeration value="EXP_ENE_SUB_CST"/>
+			<xs:enumeration value="EXP_ENE_CLR_MW"/>
+			<xs:enumeration value="EXP_ENE_CLR_CST"/>
+			<xs:enumeration value="EXP_VIR_ENE_SUB_MW"/>
+			<xs:enumeration value="EXP_VIR_SUB_CST"/>
+			<xs:enumeration value="EXP_VIR_ENE_CLR_MW"/>
+			<xs:enumeration value="EXP_VIR_CLR_CST"/>
+			<xs:enumeration value="EXP_TOT_ENE_SUB_MW"/>
+			<xs:enumeration value="EXP_TOT_SUB_CST"/>
+			<xs:enumeration value="EXP_TOT_ENE_CLR_MW"/>
+			<xs:enumeration value="EXP_TOT_CLR_CST"/>
+			<xs:enumeration value="IMP_SLF_ENE_SUB_MW"/>
+			<xs:enumeration value="IMP_SLF_ENE_CLR_MW"/>
+			<xs:enumeration value="IMP_SLF_CLR_CST"/>
+			<xs:enumeration value="IMP_ENE_SUB_MW"/>
+			<xs:enumeration value="IMP_ENE_SUB_CST"/>
+			<xs:enumeration value="IMP_ENE_CLR_MW"/>
+			<xs:enumeration value="IMP_ENE_CLR_CST"/>
+			<xs:enumeration value="IMP_VIR_ENE_SUB_MW"/>
+			<xs:enumeration value="IMP_VIR_SUB_CST"/>
+			<xs:enumeration value="IMP_VIR_ENE_CLR_MW"/>
+			<xs:enumeration value="IMP_VIR_CLR_CST"/>
+			<xs:enumeration value="IMP_TOT_ENE_SUB_MW"/>
+			<xs:enumeration value="IMP_TOT_SUB_CST"/>
+			<xs:enumeration value="IMP_TOT_ENE_CLR_MW"/>
+			<xs:enumeration value="IMP_TOT_CLR_CST"/>
+			<xs:enumeration value="DEMAND_REF_PRICE"/>
+			<xs:enumeration value="SUPPLY_REF_PRICE"/>
+			<xs:enumeration value="EFF_QTR_START_DT"/>
+			<xs:enumeration value="EFF_QTR_END_DT"/>
+			<xs:enumeration value="CLEARED_MW"/>
+			<xs:enumeration value="CB_NODAL_GRP_CNSTR_PRC"/>
+			<xs:enumeration value="CB_NODAL_LIMITS"/>
+			<xs:enumeration value="INT_START_HR"/>
+			<xs:enumeration value="MKT_RUN_ID"/>
+			<xs:enumeration value="RAMP_UP_CAP_REQ"/>
+			<xs:enumeration value="RAMP_UP_SHADOW_PRC"/>
+			<xs:enumeration value="RAMP_DOWN_CAP_REQ"/>
+			<xs:enumeration value="RAMP_DOWN_SHADOW_PRC"/>
+			<xs:enumeration value="OPR_HR"/>
+			<xs:enumeration value="REFERENCE_BUS_ID"/>
+			<!-- Added for 2012 Fall Release -->
+			<xs:enumeration value="RENEW_FCST_DA_MW"/>
+			<xs:enumeration value="RENEW_FCST_HASP_MW"/>
+			<xs:enumeration value="RENEW_FCST_ACT_MW"/>
+			<xs:enumeration value="OUTAGE MW"/>
+			<xs:enumeration value="GHG_ALLOWANCE_PRC"/>
+			<xs:enumeration value="TRM_MW"/>
+			<xs:enumeration value="TRM_UF_MW"/>
+			<xs:enumeration value="TRM_FTO_MW"/>
+			<xs:enumeration value="TRM_SPI_MW"/>
+			<!-- Added for 2013 Fall Release -->
+			<xs:enumeration value="SYS_FCST_7DA_MW"/>
+			<xs:enumeration value="RMD_AVG_MIL"/>
+			<xs:enumeration value="RMD_SYS_MIL_MUL"/>
+			<xs:enumeration value="RMD_SYS_PERF_ACC"/>
+			<xs:enumeration value="RMU_AVG_MIL"/>
+			<xs:enumeration value="RMU_SYS_MIL_MUL"/>
+			<xs:enumeration value="RMU_SYS_PERF_ACC"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="DISCLAIMER_ITEMRq">
+		<xs:sequence>
+			<xs:element name="DISCLAIMER" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ERROR">
+		<xs:sequence>
+			<xs:element name="ERR_CODE" type="m:OASISErrCode" nillable="true" minOccurs="0"/>
+			<xs:element name="ERR_DESC" type="m:OASISErrDescription" nillable="true" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="OASISErrCode">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="1000"/>
+			<xs:enumeration value="1001"/>
+			<xs:enumeration value="1002"/>
+			<xs:enumeration value="1003"/>
+			<xs:enumeration value="1004"/>
+			<xs:enumeration value="1005"/>
+			<xs:enumeration value="1006"/>
+			<xs:enumeration value="1007"/>
+			<xs:enumeration value="1008"/>
+			<xs:enumeration value="1009"/>
+			<xs:enumeration value="1010"/>
+			<xs:enumeration value="1011"/>
+			<xs:enumeration value="1012"/>
+			<xs:enumeration value="1013"/>
+			<xs:enumeration value="1014"/>
+			<xs:enumeration value="1015"/>
+			<xs:enumeration value="1016"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="OASISErrDescription">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="No data returned for the specified selection"/>
+			<xs:enumeration value="Invalid Parameters of the given report name"/>
+			<xs:enumeration value="Invalid date format, please use valid date format"/>
+			<xs:enumeration value="Timed out waiting for query response"/>
+			<xs:enumeration value="Data can be requested for period of 31 days only"/>
+			<xs:enumeration value="Report name does not exit, please use valid report name"/>
+			<xs:enumeration value="Validation exception during transformation of XML"/>
+			<xs:enumeration value="Required file does not exist"/>
+			<xs:enumeration value="Out of memory exception"/>
+			<xs:enumeration value="Exceptions in reading and writing of XML files"/>
+			<xs:enumeration value="System Error"/>
+			<xs:enumeration value="Empty Query,Please Enter ReportName,Startdate,EndDate and Other Parameters"/>
+			<xs:enumeration value="Connection refused"/>
+			<xs:enumeration value="Required Resources(xslt or xml or dir)Unavailable"/>
+			<xs:enumeration value="Start Date is beyond the limit, Please Use valid Start Date that falls within the prescribed limit"/>
+			<xs:enumeration value="GroupZip DownLoad is in Processing, Please Submit request after Sometime"/>
+			<xs:enumeration value="GROUPID Does Not Exit, Please Use Valid GROUPID Name"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

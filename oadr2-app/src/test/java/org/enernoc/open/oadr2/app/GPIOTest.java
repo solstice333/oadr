@@ -72,18 +72,10 @@ public class GPIOTest {
             case 'n':
                outpin.setOn();
                Assert.assertEquals(State.ON, outpin.getState());
-
-               if (outpin.getPin() == 2 && readpin.getDirection() != Dir.OUT)
-                  Assert.assertTrue(readpin.read() == 1);
-
                break;
             case 'f':
                outpin.setOff();
                Assert.assertEquals(State.OFF, outpin.getState());
-
-               if (outpin.getPin() == 2 && readpin.getDirection() != Dir.OUT)
-                  Assert.assertTrue(readpin.read() == 0);
-
                break;
             case 't':  
                State curr = outpin.getState();
